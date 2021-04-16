@@ -11,16 +11,10 @@
   </head>
 
   <body>
-      <div class="container">
-        <%= render "layouts/alerts" %>
-        <% if user_signed_in? %>
-            <span style="color: orange;">Welcome <%= current_user.full_name %>  !</span>
-            <img src="<%= current_user.get_image %>" alt="">
-            <div class="my-2 my-lg-0">
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
-            </div>
-        <% end %>
-        <%= yield %>
-      </div>
+    <div class="container">
+      <%= render "layouts/navbar" %>
+      <%= render "layouts/alerts" %>
+      <%= yield %>
+    </div>
   </body>
 </html>
