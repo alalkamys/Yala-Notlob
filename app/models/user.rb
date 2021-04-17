@@ -1,5 +1,11 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
+
+  has_many :friendships
+  has_many :friendships, foreign_key: :friend_id
+  has_many :friends, through: :friendships
+
+  
+    # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
