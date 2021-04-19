@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-
+  # * resource for order 
+  resources :orders do 
+    resources :order_members
+  end
   # * Friends controller routes
   get "/friends/", to: "friends#index", as: "friends"
   post "/friends/", to: "friends#create"
