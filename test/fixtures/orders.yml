@@ -3,15 +3,13 @@
 one:
   resturant_name: MyString
   mealtype: MyString
-  creator_id: 1
+  user: one
   menu_img: MyString
-  date: 2021-04-19 20:38:49
   status: MyString
 
 two:
   resturant_name: MyString
   mealtype: MyString
-  creator_id: 1
+  user: two
   menu_img: MyString
-  date: 2021-04-19 20:38:49
   status: MyString
