@@ -17,14 +17,16 @@
               <div class="col-md-6">
                 <span class="col-md-12"> <%= friend.email %> </span><br>
                 <br>
-                <%= link_to "unfriend", friends_path(friend),
+                <%= link_to "unfriend", friend_path(friend),
                           method: :delete,
                           data: { confirm: "Are you sure?" } %>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      
+    
     <% end %>
+    </div>
   </div>
 </div>
