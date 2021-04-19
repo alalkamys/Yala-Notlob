@@ -1,6 +1,6 @@
 class OrderMembersController < ApplicationController
     def index
-        
+        @orders_members = OrderMember.where(user_id: current_user.id)
       end
     
       def show
@@ -12,6 +12,6 @@ class OrderMembersController < ApplicationController
       end
     
       def create
-        
+
       end
 end
