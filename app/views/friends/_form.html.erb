@@ -1,0 +1,17 @@
+  <%= form_with model: friend, local: true do |form| %>
+  <div class="row justify-content-center">
+
+    <div class="col-md-4">
+      <%= form.email_field :email, class: "form-control", placeholder: "Write an email to add friend" %>
+      <% if flash[:error] %>
+        <div class="error text-center btn btn-danger" style="margin-top: 10px; font-size: medium;"><%= flash[:error] %></div>
+      <% end %>
+      <% if flash[:info] %>
+        <div class="notice text-center btn btn-success" style="margin-top: 10px; font-size: medium;"><%= flash[:info] %></div>
+      <% end %>
+    </div>
+    <div class="col-md-1">
+      <input type="submit" class="btn btn-primary" value="Add">
+    </div>
+  </div>
+<% end %>
