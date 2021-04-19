@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_012508) do
+ActiveRecord::Schema.define(version: 2021_04_19_183849) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "friend_id"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 2021_04_19_012508) do
     t.integer "user_id", null: false
     t.integer "group_id", null: false
     t.index ["user_id", "group_id"], name: "index_groups_users_on_user_id_and_group_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "resturant_name"
+    t.string "mealtype"
+    t.integer "creator_id"
+    t.string "menu_img"
+    t.datetime "date"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
