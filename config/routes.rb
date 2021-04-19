@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
-  # * Friends controller routes
-  get "/friends/", to: "friends#index", as: "friends"
-  post "/friends/", to: "friends#create"
-  delete "/friends/:id", to: "friends#destroy"
+  # * Friends controller routes without using resources
+  
+  # get "/friends/", to: "friends#index", as: "friends"
+  # post "/friends/", to: "friends#create"
+  # delete "/friends/:id", to: "friends#destroy", as: "friend"
+
+
+  resources :friends
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
