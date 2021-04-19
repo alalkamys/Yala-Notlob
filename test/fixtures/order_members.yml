@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  order_id: 1
-  member_id: 1
+  order: one
+  user: one
   comment: MyString
   item: MyString
   amount: 1
   price: 1.5
-  inv_status: MyString
+  joind: false
 
 two:
-  order_id: 1
-  member_id: 1
+  order: two
+  user: two
   comment: MyString
   item: MyString
   amount: 1
   price: 1.5
-  inv_status: MyString
+  joind: false
