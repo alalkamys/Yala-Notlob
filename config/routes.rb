@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :friends
+  # * Friends controller routes
+  get "/friends/", to: "friends#index", as: "friends"
+  post "/friends/", to: "friends#create"
+  delete "/friends/:id", to: "friends#destroy"
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get "pages/home"
+
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   authenticated :user do
