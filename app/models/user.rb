@@ -4,12 +4,21 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
-  
+  # * Relationship with group members
+  has_and_belongs_to_many :groups
+
+  # * Relationship with group ownership
+  has_many :groups, foreign_key: :owner_id, dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, 
+         :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+
+  def friend_with?(friend_id)
+    self.friends.where(id: friend_id).exists?
+  end
 
   def get_image
     if image
