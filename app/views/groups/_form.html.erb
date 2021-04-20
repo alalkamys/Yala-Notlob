@@ -1,16 +1,16 @@
 <div class='text-center'>
-    <% @group.errors.full_messages.each do |message| %>
+  <% @group.errors.full_messages.each do |message| %>
     <div><%= message %></div>
-    <% end %>
+  <% end %>
 </div>
 
 <%= form_with model: @group do |form| %>
-<div class="d-flex g-3 justify-content-sm-center mt-5 mb-3">
+  <div class="d-flex g-3 justify-content-sm-center mt-5 mb-3">
     <div class="col-6 align-self-center m-2">
-        <%= form.text_field :name, class: "form-control" , placeholder: "Enter group name" , autofocus: true %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter group name", autofocus: true %>
     </div>
     <div class="col-1 align-self-center">
-        <%= form.submit "Add", class: "btn btn-primary" %>
+      <%= form.submit "Add", class: "btn btn-primary" %>
     </div>
-</div>
+  </div>
 <% end %>

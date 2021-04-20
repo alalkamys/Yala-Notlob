@@ -5,16 +5,13 @@ class GroupsController < ApplicationController
   end
 
   def new
-
   end
 
   def create
     @group = Group.new(group_params.merge(owner_id: current_user.id))
-   
-    
+
     if @group.save
       redirect_to groups_path
-      
     else
       @groups = current_user.groups.all
       render :index
@@ -37,9 +34,8 @@ class GroupsController < ApplicationController
   end
 
   private
-  def group_params
-    params.require(:group).permit(:id,:name)
-  end
 
-  
+  def group_params
+    params.require(:group).permit(:name)
+  end
 end
