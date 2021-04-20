@@ -1,19 +1,61 @@
-<div>
-  <h1>Groups</h1>
-</div>
-
 <%= render "form" %>
-<div class="row col-md-12 m-3 mt-5">
-  <div class="row col-md-3 ">
-    <table class="table text-center ">
-      <thead class="table-dark">
-        <tr>
-          <th colspan="3">My Groups</th>
-        </tr>
-      </thead>
 
-      <%= render @groups %>
+<style>          
+  .card-custom {
+    background-color: #FF5A01;
+    color: white;
+  }     
+  .xy{color:white}
+</style>
 
-    </table>
+
+<div class="row">
+  <div class="col-sm-4 mb-3 mt-4">
+    <div class="card bg-light">
+      <h3><div class="card-header card-custom">My Groups</div></h3>
+      <div class="card-body">
+        <%= render @groups %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-8 mb-3 mt-4">
+    <div class="card bg-dark">
+      <h3><div class="card-header card-custom">Group Name</div></h3>
+      <%= form_with model: @friend do |form| %>
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+          <%= form.email_field :email, class: "form-control", placeholder: "Write an email to add friend to this group" %> 
+            <% if flash[:error] %>
+              <div class="error text-center alert alert-danger" style="margin-top: 10px; font-size: medium;"><%= flash[:error] %></div>
+            <% end %>
+
+            <% if flash[:info] %>
+              <div class="notice text-center alert alert-success" style="margin-top: 10px; font-size: medium;"><%= flash[:info]%></div>
+            <% end %>
+
+          </div>
+          <div class="col-md-1">
+            <input type="submit" class="btn btn" style="background-color: #FF5A01; color: white" value="Add">
+          </div>
+        </div>
+      <% end %>
+
+
+
+<div class="card-body">
+    <div class="row " style="top:0%, left:0%">
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;">
+        <%# I will add friends list here %>
+      <div class="card-body">
+        <h4 class="card-text xy">Ahmed has created <a class="card-text xy" href=""> an order </a>for launch </h4><br>
+        <h4 class="card-text xy">Ahmed has created <a class="card-text xy" href=""> an order </a>for launch </h4><br>
+        <h4 class="card-text xy">Ahmed has created <a class="card-text xy" href=""> an order </a>for launch </h4><br>
+        <h4 class="card-text xy">Ahmed has created <a class="card-text xy" href=""> an order </a>for launch </h4><br>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
