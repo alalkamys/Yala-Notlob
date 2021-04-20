@@ -28,7 +28,7 @@ class User < ApplicationRecord
       return image
     end
     gravatar_id = Digest::MD5::hexdigest(email).downcase
-    url = "https://gravatar.com/avatar/#{gravatar_id}?s=32&d=identicon&r=PG"
+    return "https://gravatar.com/avatar/#{gravatar_id}?s=32&d=identicon&r=PG"
   end
 
   def self.connect_to_facebook(auth, signed_in_resource = nil)

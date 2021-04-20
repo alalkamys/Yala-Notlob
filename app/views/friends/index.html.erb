@@ -1,4 +1,31 @@
 <div>
-  <h1 class="title w-25" style="margin-left: 5%; ">Friends</h1>
-  <%= render 'friends/form', friend: @friend %>
+    <h1 class="title w-25" style="margin-left: 5%; ">Friends</h1>
+    <%= render 'friends/form', friend: @friend %>
+
+    <hr />
+    <h3 class="w-25"> Friends List </h3>
+    <div class="row " style="top:0%, left:0%">
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;">
+
+            <% for friend in @friends %>
+            <div class="col-md-4">
+                <div class="row" style="top:0%, left:0%">
+                    <div class="container">
+                        <div class="col-md-6">
+                            <%= image_tag friend.get_image, style: "height:70px;width:70;" %>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="col-md-12"> <%= friend.email %> </span><br>
+                            <br>
+                            <%= link_to "unfriend", friend_path(friend),
+                          method: :delete,
+                          data: { confirm: "Are you sure?" } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            
+        </div>
+    </div>
 </div>
