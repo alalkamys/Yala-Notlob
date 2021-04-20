@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  resturant_name: MyString
+  mealtype: MyString
+  user: one
+  menu_img: MyString
+  status: MyString
+
+two:
+  resturant_name: MyString
+  mealtype: MyString
+  user: two
+  menu_img: MyString
+  status: MyString

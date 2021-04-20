@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  # * Relationship with Order
+  has_many :orders, dependent: :destroy
+
   # * Relationship with group members
   has_and_belongs_to_many :groups
 

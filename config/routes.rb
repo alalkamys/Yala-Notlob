@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     post '/user', to:	'groups#create_user', as: 'create_user'
     delete '/user/:user_id', to: 'groups#destroy_user', as: 'destroy_user'
   end
+  
+  # * resource for order 
+  resources :orders do 
+    resources :order_members
+  end
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
