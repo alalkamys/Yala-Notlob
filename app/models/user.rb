@@ -24,11 +24,12 @@ class User < ApplicationRecord
   end
 
   def get_image
-    if image
+    if image != ""
       return image
     end
-    gravatar_id = Digest::MD5::hexdigest(email).downcase
-    return "https://gravatar.com/avatar/#{gravatar_id}?s=32&d=identicon&r=PG"
+    return 'https://img.icons8.com/cotton/72/gender-neutral-user--v1.png'
+    # gravatar_id = Digest::MD5::hexdigest(email).downcase
+    # return "https://gravatar.com/avatar/#{gravatar_id}?s=32&d=identicon&r=PG"
   end
 
   def self.connect_to_facebook(auth, signed_in_resource = nil)

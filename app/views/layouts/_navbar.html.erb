@@ -8,9 +8,9 @@
 
   <nav class="navbar navbar-custom navbar-dark navbar-expand-sm" style="max-width: 100%">
     <div class="container-fluid">
-      <a class="navbar-brand ml-5" href="<% root_path %>"><b>Yalla</b>
+      <a class="navbar-brand ml-5" href="<% root_path %>"><b>Yalla </b>
       <img src="https://img.icons8.com/cute-clipart/2x/kawaii-pizza.png" width="55" height="55" alt="logo">
-      <b>Notlob</b>
+      <b> Notlob</b>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
         <span class="navbar-toggler-icon"></span>
@@ -22,13 +22,14 @@
 
       <ul class="navbar-nav ml-5 mr-auto">
         <li class="nav-item">
-          <b><a class="nav-link" userhref="<% root_path %>">Orders</a></b>
+          <b><a class="nav-link" href="<% root_path %>">Orders</a></b>
         </li>
         <li class="nav-item">
           <b><a class="nav-link" href="<% root_path %>">Menu</a></b>
         </li>
         <li class="nav-item">
-          <b><a class="nav-link" href="<% root_path %>">Groups</a></b>
+          <b><%=  link_to 'Groups', groups_path, class: "nav-link" %></b>
+           
         </li>
       </ul>
 
