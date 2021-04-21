@@ -2,7 +2,6 @@
   <h1>Groups</h1>
 </div>
 
-<%= render "form" %>
 <div class="row col-md-12 m-3 mt-5">
   <div class="row col-md-3 ">
     <table class="table text-center ">
@@ -25,47 +24,31 @@
         <th colspan="3"><%= @selected_group.name %></th>
       </tr>
     </thead>
-
-    <tbody>
-      <%= form_tag group_search_user_path, remote: true, method: :get do %>
-        <tr>
-          <td>
-            <div class="form-group d-flex justify-content-between">
-              <div class="col-3 align-self-center m-auto">
-                <%= label :name, "Add Friend to Group", class: "col-form-label fw-bold" %>
-              </div>
-              <div class="col-sm-6 m-2 align-self-center m-auto">
-                <%= email_field_tag :email, params[:email], placeholder: "Name or email", autofocus: true,
-                                                         class: "form-control" %>
-              </div>
-              <div class="col-2 align-self-center m-auto d-none">
-                <%= button_tag type: :submit, class: "btn btn-success btn-lg", id: "btn-img" do %>
-                  <%= 'Search' %>
-                <% end %>
-              </div>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-
-      <tr>
-        <td>
-          <div id="member-results">
-            <% @members.each do |member| %>
-              <p><%= member.full_name %></p>
-              <%= link_to "Remove", group_destroy_user_path(user_id: member.id), :method => "delete", data: { confirm: "Are you sure?" } %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    </tbody>
   </table>
 </div>
 
+<%= form_tag group_search_user_path, remote: true, method: :get do %>
+
+  <div class="form-group d-flex justify-content-between">
+    <div class="col-3 align-self-center m-auto">
+      <%= label :name, "Add Friend to Group", class: "col-form-label fw-bold" %>
+    </div>
+    <div class="col-sm-6 m-2 align-self-center m-auto">
+      <%= text_field_tag :user, params[:user], placeholder: "Name or email", autofocus: true,
+                                               class: "form-control" %>
+    </div>
+    <div class="col-2 align-self-center m-auto d-none" id>
+      <input type="submit" value="Search" class="btn btn-success btn-lg" id="btn-img">
+    </div>
+  </div>
+
+<% end %>
+
+<div id="member-results">
+  <% @members.each do |member| %>
+    <p><%= member.full_name %></p>
+    <%= link_to "Remove", group_destroy_user_path(user_id: member.id), :method => "delete", data: { confirm: "Are you sure?" } %>
+  <% end %>
 </div>
 
-<%= javascript_tag do %>
-  document.getElementById('member').addEventListener('keyup', () => {
-  document.getElementById('btn-img').click();
-  });
-<% end %>
+<%= javascript_pack_tag "groups/add_user" %>

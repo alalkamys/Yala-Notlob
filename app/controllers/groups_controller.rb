@@ -35,37 +35,27 @@ class GroupsController < ApplicationController
 
   def create_user
     @member = User.find(params[:user])
-    puts "params: #{params}"
-    puts "params[:user] #{params[:user]}"
-    puts "@member: #{@member}"
-    # @member = current_user.groups.find(params[:group_id]).group_member.new(user_id: @member.id)
-    @member = GroupsUser.new({"user_id"=> @member.id ,"group_id"=> params[:group_id ] })
+    @member = GroupsUser.new({ "user_id" => @member.id, "group_id" => params[:group_id] })
     @member.save
     redirect_to group_add_user_path
   end
 
   def destroy_user
-    GroupsUser.delete_by(user_id: params[:user_id] ,group_id: params[:group_id])
-    # Group.find(params[:group_id]).memberships.where(member_id: params[:member_id])[0].destroy
-    # GroupsUser.where(member_id: params[:member_id])[0].destroy
-   
+    GroupsUser.delete_by(user_id: params[:user_id], group_id: params[:group_id])
     redirect_to group_add_user_path
   end
 
-  #TODO needs a lot of working
   def search
-    if params[:email].present?
+    if params[:user].present?
       @group = current_user.groups.find(params[:group_id])
-      # @members = User.find_by email: params[:user]
-      @members = User.where(email: params[:email])
-      # @members = current_user.except_current_user(@members)
+      @members = current_user.search(params[:user])
       if @members
         respond_to do |format|
           format.js { render partial: "groups/member_result" }
         end
       else
         respond_to do |format|
-          flash.now[:alert] = "Couldn't find user"
+          flash.now[:alert] = "User is not in your friendlist"
           format.js { render partial: "groups/member_result" }
         end
       end
