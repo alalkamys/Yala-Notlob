@@ -24,6 +24,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def finish
+    @order = Order.find(params[:id])
+    @Items = OrderMember.joins(:order)
+  end
+
+  def cancel
+    @order = Order.find(params[:id])
+    @Items = OrderMember.joins(:order)
+  end
+
   private
     def order_params
       params.require(:order).permit(:mealtype, :resturant_name, :menu_img).merge(user: current_user)
