@@ -18,8 +18,8 @@
                 <tr>
                     <td><%= order.mealtype %></td>
                     <td><%= order.resturant_name %></td>
-                    <td><%= order %></td>
-                    <td><%= order %></td>
+                    <td><%= order.invited_members.count %></td>
+                    <td><%= order.invited_members.where(joind: true).count %></td>
                     <td><%= order.status %></td>
                     <% if order.user == current_user && order.status == "Active" %>
                         <td><%= link_to "View", order %></td>

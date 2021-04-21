@@ -1,0 +1,16 @@
+<%= form_with model: [ @order, @order.order_members.build ] do |form| %>
+    
+    <%= form.label :Item %>
+    <%= form.text_field :item %>
+    <%= form.label :Amount %>
+    <%= form.number_field :amount %>
+    <%= form.label :Price %>
+    <%= form.number_field :price %>
+    <%= form.label :Comment %>
+    <%= form.text_field :comment %>
+    
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  

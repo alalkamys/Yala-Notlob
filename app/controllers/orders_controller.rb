@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @Items = OrderMember.joins(:order)
+    @Items = OrderMember.where(order: @order)
   end
 
   def new

@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2021_04_21_190853) do
     t.index ["user_id", "group_id"], name: "index_groups_users_on_user_id_and_group_id"
   end
 
+  create_table "invited_members", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "user_id", null: false
+    t.boolean "joind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_invited_members_on_order_id"
+    t.index ["user_id"], name: "index_invited_members_on_user_id"
+  end
+
   create_table "order_members", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "user_id", null: false
@@ -41,7 +51,6 @@ ActiveRecord::Schema.define(version: 2021_04_21_190853) do
     t.string "item"
     t.integer "amount"
     t.float "price"
-    t.boolean "joind"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_members_on_order_id"
@@ -76,6 +85,8 @@ ActiveRecord::Schema.define(version: 2021_04_21_190853) do
   end
 
   add_foreign_key "groups", "users", column: "owner_id"
+  add_foreign_key "invited_members", "orders"
+  add_foreign_key "invited_members", "users"
   add_foreign_key "order_members", "orders"
   add_foreign_key "order_members", "users"
   add_foreign_key "orders", "users"

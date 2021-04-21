@@ -27,16 +27,4 @@
 </div>
 
 <h1>Add Item</h1>
-
-<h1>resturant Name</h1>
-<p><%= @order.resturant_name %></p>
-<h1>order Type</h1>
-<p><%= @order.mealtype %></p>
-<h1>Owner Details</h1>
-<p><%= @order.user.full_name %></p>
-<h1>order Status</h1>
-<p><%= @order.status %></p>
-<h1>order Created at</h1>
-<p><%= @order.created_at %></p>
-<h1>order Updated at</h1>
-<p><%= @order.updated_at %></p>
+<%= render "form_item" %>

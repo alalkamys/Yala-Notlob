@@ -3,15 +3,9 @@
 one:
   order: one
   user: one
-  comment: MyString
-  item: MyString
-  amount: 1
-  price: 1.5
+  joind: false
 
 two:
   order: two
   user: two
-  comment: MyString
-  item: MyString
-  amount: 1
-  price: 1.5
+  joind: false
