@@ -1,0 +1,30 @@
+<%= form_with model: order do |form| %>
+    <div>
+      <%= form.label :'order for' %><br>
+      <%= form.select :mealtype, ['breakfast', 'launch', 'dinner', 'other'], selected: 'launch' %>
+    </div>
+    <div>
+      <%= form.label :restaurant_name %><br>
+      <%= form.text_field :resturant_name %>
+      <% order.errors.full_messages_for(:resturant_name).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+    <%= form.label :'Upload menu_img' %>
+    <%= form.file_field :menu_img %>
+    
+    <div>
+      <%= form.label :owner %><br>
+      <%= form.text_field :user, value: current_user,:readonly => true %><br>
+    </div>
+    <% @friends.each do |friend| %>
+    <div>
+      <%= form.label :friend %><br>
+      <%= form.text_field :user, value: friend.friend.email,:readonly => true %><br>
+    </div>
+    <% end %>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  
