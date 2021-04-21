@@ -35,12 +35,12 @@
                 <%= label :name, "Add Friend to Group", class: "col-form-label fw-bold" %>
               </div>
               <div class="col-sm-6 m-2 align-self-center m-auto">
-                <%= text_field_tag :user, params[:user], placeholder: "Name or email", autofocus: true,
+                <%= email_field_tag :email, params[:email], placeholder: "Name or email", autofocus: true,
                                                          class: "form-control" %>
               </div>
               <div class="col-2 align-self-center m-auto d-none">
                 <%= button_tag type: :submit, class: "btn btn-success btn-lg", id: "btn-img" do %>
-                  <%= "Search" %>
+                  <%= 'Search' %>
                 <% end %>
               </div>
             </div>

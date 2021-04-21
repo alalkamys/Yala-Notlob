@@ -1,0 +1,29 @@
+<div class="card card-header results-block">
+    <table class="col-md-12">
+      <tbody>
+        <tr>
+        <% @members.each do |member| %>
+            <% puts @members %>
+            <% if  !@group.group_member?(member.id)%>
+            <h1> Heloooooooooooooooooooooooooooooooooooooooo </h1>
+            <% else %>
+                    <h1> Noooooooooooooooooooo </h1>
+
+            <% end %>
+
+          <% if  current_user.friend_with?(member.id) && !@group.group_member?(member.id)%>
+            <td><strong>P.P:
+              <% if member.image? %>
+                <%= image_tag member.image.url, style: 'height:70px;width:70;' %></td>
+              <% else %>
+              <img src="https://i.ibb.co/SK3QN1j/unknown-image.jpg" alt="unknown-image" style="width: 70px;height: 70px;">
+              <% end %></strong></td>
+            <td><strong>Name: </strong> <%= member.full_name %></td>
+            <td><strong>Email: </strong> <%= member.email %></td>
+            <td><%= link_to 'Add', group_create_user_path(user: member), class: "btn btn-sm btn-success", method: :post %></td>
+          <% end %>
+          <tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

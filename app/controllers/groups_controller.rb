@@ -38,20 +38,27 @@ class GroupsController < ApplicationController
     puts "params: #{params}"
     puts "params[:user] #{params[:user]}"
     puts "@member: #{@member}"
-    @member = current_user.groups.find(params[:group_id]).memberships.new(member_id: @member.id)
+    # @member = current_user.groups.find(params[:group_id]).group_member.new(user_id: @member.id)
+    @member = GroupsUser.new({"user_id"=> @member.id ,"group_id"=> params[:group_id ] })
     @member.save
-    redirect_to group_add_member_path
+    redirect_to group_add_user_path
   end
 
   def destroy_user
+    GroupsUser.delete_by(user_id: params[:user_id] ,group_id: params[:group_id])
+    # Group.find(params[:group_id]).memberships.where(member_id: params[:member_id])[0].destroy
+    # GroupsUser.where(member_id: params[:member_id])[0].destroy
+   
+    redirect_to group_add_user_path
   end
 
   #TODO needs a lot of working
   def search
-    if params[:member].present?
+    if params[:email].present?
       @group = current_user.groups.find(params[:group_id])
-      @members = User.search(params[:member])
-      @members = current_user.except_current_user(@members)
+      # @members = User.find_by email: params[:user]
+      @members = User.where(email: params[:email])
+      # @members = current_user.except_current_user(@members)
       if @members
         respond_to do |format|
           format.js { render partial: "groups/member_result" }
