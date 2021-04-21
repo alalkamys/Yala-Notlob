@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # * Relationship with Order
   has_many :orders, dependent: :destroy
 
+  # * Relationship with Invited members
+  has_many :invited_members
+
   # * Relationship with group members
   has_and_belongs_to_many :groups
 

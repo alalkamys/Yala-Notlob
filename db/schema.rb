@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_182801) do
+ActiveRecord::Schema.define(version: 2021_04_21_183214) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "friend_id"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2021_04_21_182801) do
     t.integer "user_id", null: false
     t.integer "group_id", null: false
     t.index ["user_id", "group_id"], name: "index_groups_users_on_user_id_and_group_id"
+  end
+
+  create_table "invited_members", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "user_id", null: false
+    t.boolean "joind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_invited_members_on_order_id"
+    t.index ["user_id"], name: "index_invited_members_on_user_id"
   end
 
   create_table "order_members", force: :cascade do |t|
@@ -75,6 +85,8 @@ ActiveRecord::Schema.define(version: 2021_04_21_182801) do
   end
 
   add_foreign_key "groups", "users", column: "owner_id"
+  add_foreign_key "invited_members", "orders"
+  add_foreign_key "invited_members", "users"
   add_foreign_key "order_members", "orders"
   add_foreign_key "order_members", "users"
   add_foreign_key "orders", "users"
