@@ -7,7 +7,6 @@ one:
   item: MyString
   amount: 1
   price: 1.5
-  joind: false
 
 two:
   order: two
@@ -16,4 +15,3 @@ two:
   item: MyString
   amount: 1
   price: 1.5
-  joind: false
