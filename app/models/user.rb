@@ -23,6 +23,15 @@ class User < ApplicationRecord
     self.friends.where(id: friend_id).exists?
   end
 
+  def search(attribute)
+    trimmed_attribute = attribute.strip
+    (self.match("full_name", trimmed_attribute) + self.match("email", trimmed_attribute)).uniq
+  end
+
+  def match(field, value)
+    self.friends.where("#{field} like ?", "%#{value}%")
+  end
+
   def get_image
     if image
       return image
