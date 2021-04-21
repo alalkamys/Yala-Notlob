@@ -40,5 +40,5 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignoring application.yml
-#/config/application.yml
+/config/application.yml
 /references
