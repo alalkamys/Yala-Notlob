@@ -18,6 +18,7 @@ class FriendsController < ApplicationController
     redirect_to friends_path
   end
 
+  # TODO Need to remove friends if exists in the user groups
   def destroy
     @friend = Friendship.where(friend_id: params[:id], user_id: current_user.id).first
     @friend.destroy

@@ -35,31 +35,37 @@ class GroupsController < ApplicationController
 
   def create_user
     @member = User.find(params[:user])
-    puts "params: #{params}"
-    puts "params[:user] #{params[:user]}"
-    puts "@member: #{@member}"
-    @member = current_user.groups.find(params[:group_id]).memberships.new(member_id: @member.id)
-    @member.save
-    redirect_to group_add_member_path
+    @member = GroupsUser.new({ "user_id" => @member.id, "group_id" => params[:group_id] })
+    if @member.save
+      @member = User.find(params[:user])
+      respond_to do |format|
+        format.js { render partial: "javascripts/groups/create_user" }
+      end
+    end
   end
 
   def destroy_user
+    GroupsUser.delete_by(user_id: params[:user_id], group_id: params[:group_id])
+    @member_id = params[:user_id]
+    respond_to do |format|
+      format.js { render partial: "javascripts/groups/destroy_user" }
+    end
+    # * Or you can write it in this way, it's basically the same
+    # render js: id if params[:format] == "js"
   end
 
-  #TODO needs a lot of working
   def search
-    if params[:member].present?
+    if params[:user].present?
       @group = current_user.groups.find(params[:group_id])
-      @members = User.search(params[:member])
-      @members = current_user.except_current_user(@members)
+      @members = current_user.search(params[:user])
       if @members
         respond_to do |format|
-          format.js { render partial: "groups/member_result" }
+          format.js { render partial: "javascripts/groups/member_result" }
         end
       else
         respond_to do |format|
-          flash.now[:alert] = "Couldn't find user"
-          format.js { render partial: "groups/member_result" }
+          flash.now[:alert] = "User is not in your friendlist"
+          format.js { render partial: "javascripts/groups/member_result" }
         end
       end
     else
@@ -67,7 +73,7 @@ class GroupsController < ApplicationController
         @group = current_user.groups.find(params[:group_id])
         @members = []
         flash.now[:alert] = "Please enter a friend name or email to search"
-        format.js { render partial: "groups/member_result" }
+        format.js { render partial: "javascripts/groups/member_result" }
       end
     end
   end
