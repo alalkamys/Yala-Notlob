@@ -1,18 +1,25 @@
-<div class="card card-header results-block">
-  <table class="col-md-12">
-    <tbody>
-      <tr>
-        <% @members.each do |member| %>
-          <% if current_user.friend_with?(member.id) && !@group.group_member?(member.id) %>
-            <td><strong>P.P:
-                <%= image_tag member.get_image, style: "height:70px;width:70;" %></td>
-            </strong></td>
-          <td><strong>Name: </strong> <%= member.full_name %>
-            <td><strong>Email: </strong> <%= member.email %></td>
-            <td><%= link_to "Add", group_create_user_path(user: member), class: "btn btn-sm btn-success", method: :post %></td>
-          <% end %>
-        </tr>
+<% @members.each do |member| %>
+  <% if  current_user.friend_with?(member.id) && !@group.group_member?(member.id)%>
+    <div class="col-md-2">
+      <% if member.image? %>
+        <%= image_tag member.get_image, style: 'height:50px;width:50;' %> 
       <% end %>
-    </tbody>
-  </table>
-</div>
+    </div>
+    <div class="col-md-4">
+      <strong style="color:white"> Name: </strong> <span style="color:white"> <%= member.full_name %></span>
+    </div>
+    <div class="col-md-5">
+      <strong style="color:white"> Email: </strong> <span style="color:white"> <%= member.email %></span>
+    </div>
+    <div class="col-md-1">
+      <%= link_to 'Add', group_create_user_path(user: member), class: "btn btn-sm btn-success", method: :post %>
+    </div>
+  <% end %>
+  <hr/>
+  <hr/>
+<% end %>
+
+    
+
+
+

@@ -32,10 +32,11 @@ class User < ApplicationRecord
     self.friends.where("#{field} like ?", "%#{value}%")
   end
 
-  def get_image
-    if image
+  def get_image 
+    if image != ""
       return image
     end
+    return 'https://img.icons8.com/cotton/72/gender-neutral-user--v1.png'
     gravatar_id = Digest::MD5::hexdigest(email).downcase
     return "https://gravatar.com/avatar/#{gravatar_id}?s=32&d=identicon&r=PG"
   end

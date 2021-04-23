@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "bootstrap" // I added it here because the dropdown in navbar was not working, but now it works after add this line
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
 

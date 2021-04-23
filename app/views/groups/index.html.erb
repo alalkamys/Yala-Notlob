@@ -1,19 +1,26 @@
-<div>
-  <h1>Groups</h1>
-</div>
-
 <%= render "form" %>
-<div class="row col-md-12 m-3 mt-5">
-  <div class="row col-md-3 ">
-    <table class="table text-center ">
-      <thead class="table-dark">
-        <tr>
-          <th colspan="3">My Groups</th>
-        </tr>
-      </thead>
 
-      <%= render @groups %>
+<style>          
+  .card-custom {
+    background-color: #FF5A01;
+    color: white;
+  }     
+  .xy{color:white}
+</style>
 
-    </table>
+
+<div class="row">
+
+  <div class="col-sm-4 mb-3 mt-4">
+    <div class="card bg-light">
+      <h3><div class="card-header card-custom">My Groups</div></h3>
+      <div class="card-body">
+        <%= render @groups %>
+      </div>
+    </div>
   </div>
-</div>
+
+
+
+
+ 

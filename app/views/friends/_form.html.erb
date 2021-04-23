@@ -1,16 +1,24 @@
-  <%= form_with model: friend, local: true do |form| %>
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <%= form.email_field :email, class: "form-control", placeholder: "Write an email to add friend" %>
-      <% if flash[:error] %>
-        <div class="error text-center btn btn-danger" style="margin-top: 10px; font-size: medium;"><%= flash[:error] %></div>
-      <% end %>
-      <% if flash[:info] %>
-        <div class="notice text-center btn btn-success" style="margin-top: 10px; font-size: medium;"><%= flash[:info] %></div>
-      <% end %>
-    </div>
-    <div class="col-md-1">
-      <input type="submit" class="btn btn-primary" value="Add">
-    </div>
+
+<div class="card mt-5">
+  <div class="card-header"><h3><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16"><path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+</svg> Add a Friend</h3></div>
+  <div class="card-body">
+    <%= form_with model: friend, local: true do |form| %>
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+         <%= form.email_field :email, class: "form-control", placeholder: "Write an email to add friend" %> 
+          <% if flash[:error] %>
+            <div class="error text-center alert alert-danger" style="margin-top: 10px; font-size: medium;"><%= flash[:error] %></div>
+          <% end %>
+          <% if flash[:info] %>
+            <div class="notice text-center alert alert-success" style="margin-top: 10px; font-size: medium;"><%= flash[:info]%></div>
+          <% end %>
+
+        </div>
+        <div class="col-md-1">
+          <input type="submit" class="btn btn" style="background-color: #FF5A01; color: white" value="Add">
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
