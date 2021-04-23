@@ -1,8 +1,8 @@
 <% @members.each do |member| %>
-  <% if  current_user.friend_with?(member.id) && !@group.group_member?(member.id)%>
+  <% if current_user.friend_with?(member.id) && !@group.group_member?(member.id) %>
     <div class="col-md-2">
       <% if member.image? %>
-        <%= image_tag member.get_image, style: 'height:50px;width:50;' %> 
+        <%= image_tag member.get_image, style: "height:50px;width:50;" %>
       <% end %>
     </div>
     <div class="col-md-4">
@@ -12,14 +12,9 @@
       <strong style="color:white"> Email: </strong> <span style="color:white"> <%= member.email %></span>
     </div>
     <div class="col-md-1">
-      <%= link_to 'Add', group_create_user_path(user: member), class: "btn btn-sm btn-success", method: :post %>
+      <%= link_to "Add", group_create_user_path(user: member), class: "btn btn-sm btn-success", method: :post, remote: true %>
     </div>
   <% end %>
   <hr/>
   <hr/>
 <% end %>
-
-    
-
-
-

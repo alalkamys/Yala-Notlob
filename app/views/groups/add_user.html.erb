@@ -1,76 +1,81 @@
-<style>          
+<style>
   .card-custom {
     background-color: #FF5A01;
     color: white;
-  }     
+  }
   .xy{color:white}
 </style>
 
-
 <%= render "form" %>
-
 
 <div class="row">
   <div class="col-sm-4 mb-3 mt-4">
     <div class="card bg-light">
-      <h3><div class="card-header card-custom">My Groups</div></h3>
+      <h3>
+        <div class="card-header card-custom">My Groups</div>
+      </h3>
       <div class="card-body">
         <%= render @groups %>
       </div>
     </div>
   </div>
 
-
-
-
   <div class="col-sm-8 mb-3 mt-4">
-    <div class="card bg-dark">
-      <h3><div class="card-header card-custom"><%= @selected_group.name %></div></h3>
+    <div class="card bg-light">
+      <h3>
+        <div class="card-header card-custom"><%= @selected_group.name %></div>
+      </h3>
 
-    <%= form_tag group_search_user_path, remote: true, method: :get do %>
-        
-      <div class="form-group d-flex justify-content-between">
-        <div class="col-3 align-self-center m-auto">
-          <%= label :name, "Add a Friend to Group", class: "col-form-label fw-bold" , style: "color:white"%>
+      <%= form_tag group_search_user_path, remote: true, method: :get do %>
+
+        <div class="form-group d-flex justify-content-between">
+          <div class="col-3 align-self-center m-auto">
+            <%= label :name, "Add a Friend to Group", class: "col-form-label fw-bold" %>
+          </div>
+          <div class="col-sm-8 m-2 align-self-center">
+            <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email to add it to this group", autofocus: true, class: "form-control" %>
+          </div>
+          <div class="col-2 align-self-center m-auto d-none">
+            <input type="submit" value="Search" class="btn btn-success btn-lg" id="btn-img">
+          </div>
         </div>
-        <div class="col-sm-8 m-2 align-self-center">
-          <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email to add it to this group", autofocus: true, class: "form-control" %>
-        </div>
-        <div class="col-2 align-self-center m-auto d-none">
-          <input type="submit" value="Search" class="btn btn-success btn-lg" id="btn-img">
+      <% end %>
+
+      <div class="row" style="top:0%, left:0%">
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="search-results">
         </div>
       </div>
-<% end %>
 
+      <% ################## %>
 
-<%##################  %>
-
-        <div class="row" style="top:0%, left:0%">
-          <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="member-results">
-            <% @members.each do |member| %>
-              <div class="col-md-4">
-                <div class="row" style="top:0%, left:0%">
-                  <div class="card mx-6 my-4">
-                    <div class="card-body">
-                      <div class="col-md-6">
-                        <%= image_tag member.get_image, style: "height:80px;width:80;" %>
-                      </div>
-                      <div class="col-md-6">
-                        <br><h5><div class="badge badge-light"><%= member.full_name %></div></h5>
-                        <hr/>
-                        <div class="btn btn-danger btn-sm"> 
-                          <%= link_to "Remove", group_destroy_user_path(user_id: member.id), :method => "delete", style:"color:white", data: { confirm: "Are you sure?" } %>
-                        </div>
+      <div class="row" style="top:0%, left:0%">
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="member-results">
+          <% @members.each do |member| %>
+            <div class="col-md-4" id="<%= member.id %>">
+              <div class="row" style="top:0%, left:0%">
+                <div class="card mx-6 my-4">
+                  <div class="card-body">
+                    <div class="col-md-6">
+                      <%= image_tag member.get_image, style: "height:80px;width:80;" %>
+                    </div>
+                    <div class="col-md-6">
+                      <br>
+                      <h5>
+                        <div class="badge badge-light"><%= member.full_name %></div>
+                      </h5>
+                      <hr/>
+                      <div class="btn btn-danger btn-sm">
+                        <%= link_to "Remove", group_destroy_user_path(user_id: member.id), :method => "delete", style: "color:white", data: { confirm: "Are you sure?" }, remote: true %>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
+      </div>
 
-<%################# %>
+      <% ################# %>
 
-
-<%= javascript_pack_tag "groups/add_user" %>
+      <%= javascript_pack_tag "groups/add_user" %>

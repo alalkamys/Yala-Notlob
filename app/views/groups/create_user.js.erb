@@ -1,0 +1,6 @@
+console.log("Inside create_user.js.erb");
+
+$('#user').val('');
+$('#search-results').html('');
+$('#member-results').prepend('<%= j render "groups/added_member.html" %>');
+$('#<%= @member.id %>').hide().fadeIn(1000);

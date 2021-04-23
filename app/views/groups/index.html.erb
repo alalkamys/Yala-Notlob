@@ -1,26 +1,22 @@
 <%= render "form" %>
 
-<style>          
+<style>
   .card-custom {
     background-color: #FF5A01;
     color: white;
-  }     
+  }
   .xy{color:white}
 </style>
-
 
 <div class="row">
 
   <div class="col-sm-4 mb-3 mt-4">
     <div class="card bg-light">
-      <h3><div class="card-header card-custom">My Groups</div></h3>
+      <h3>
+        <div class="card-header card-custom">My Groups</div>
+      </h3>
       <div class="card-body">
         <%= render @groups %>
       </div>
     </div>
   </div>
-
-
-
-
- 

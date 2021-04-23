@@ -36,13 +36,22 @@ class GroupsController < ApplicationController
   def create_user
     @member = User.find(params[:user])
     @member = GroupsUser.new({ "user_id" => @member.id, "group_id" => params[:group_id] })
-    @member.save
-    redirect_to group_add_user_path
+    if @member.save
+      @member = User.find(params[:user])
+      respond_to do |format|
+        format.js
+      end
+    end
+    # redirect_to group_add_user_path
   end
 
   def destroy_user
     GroupsUser.delete_by(user_id: params[:user_id], group_id: params[:group_id])
-    redirect_to group_add_user_path
+    @member_id = params[:user_id]
+    respond_to :js
+    # * Or you can write it in this way, it's basically the same
+    # render js: id if params[:format] == "js"
+
   end
 
   def search
