@@ -1,12 +1,30 @@
-<h1>resturant Name</h1>
-<p><%= @order.resturant_name %></p>
-<h1>order Type</h1>
-<p><%= @order.mealtype %></p>
-<h1>Owner Details</h1>
-<p><%= @order.user.full_name %></p>
-<h1>order Status</h1>
-<p><%= @order.status %></p>
-<h1>order Created at</h1>
-<p><%= @order.created_at %></p>
-<h1>order Updated at</h1>
-<p><%= @order.updated_at %></p>
+<h1>Order Details</h1>
+<div class="row col-md-12 m-3 mt-5">
+    <div class="row col-md-3 ">
+        <table class="table text-center ">
+            <thead class="table-dark">
+                <tr>
+                    <th>Person</th>
+                    <th>Item</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%  @Items.each do |item|   %>
+                <tr>
+                    <td><%= item.user.full_name %></td>
+                    <td><%= item.item %></td>
+                    <td><%= item.amount %></td>
+                    <td><%= item.price %></td>
+                    <td><%= item.comment %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<h1>Add Item</h1>
+<%= render "form_item" %>

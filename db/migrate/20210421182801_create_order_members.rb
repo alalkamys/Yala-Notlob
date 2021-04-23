@@ -7,7 +7,6 @@ class CreateOrderMembers < ActiveRecord::Migration[6.1]
       t.string :item
       t.integer :amount
       t.float :price
-      t.boolean :joind
 
       t.timestamps
     end

@@ -1,3 +1,37 @@
-<% @orders.each do |order| %>
-  <p><%= order.resturant_name %></p>
-<% end %>
+<h1>Orders</h1>
+<%= link_to "Create new order", new_order_path %>
+<div class="row col-md-12 m-3 mt-5">
+    <div class="row col-md-3 ">
+        <table class="table text-center ">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order</th>
+                    <th>Restaurante</th>
+                    <th>Invited</th>
+                    <th>Joined</th>
+                    <th>Status</th>
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%  @orders.each do |order|   %>
+                <tr>
+                    <td><%= order.mealtype %></td>
+                    <td><%= order.resturant_name %></td>
+                    <td><%= order.invited_members.count %></td>
+                    <td><%= order.invited_members.where(joind: true).count %></td>
+                    <td><%= order.status %></td>
+                    <% if order.user == current_user && order.status == "Active" %>
+                        <td><%= link_to "View", order %></td>
+                        <td><%= link_to "Finish", order %></td>
+                        <td><%= link_to "Cancel", order %></td>
+                    <% else %>
+                        <td><%= link_to "View", order %></td>
+                    <% end %>
+
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
