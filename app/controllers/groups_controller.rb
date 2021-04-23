@@ -39,19 +39,19 @@ class GroupsController < ApplicationController
     if @member.save
       @member = User.find(params[:user])
       respond_to do |format|
-        format.js
+        format.js { render partial: "javascripts/groups/create_user" }
       end
     end
-    # redirect_to group_add_user_path
   end
 
   def destroy_user
     GroupsUser.delete_by(user_id: params[:user_id], group_id: params[:group_id])
     @member_id = params[:user_id]
-    respond_to :js
+    respond_to do |format|
+      format.js { render partial: "javascripts/groups/destroy_user" }
+    end
     # * Or you can write it in this way, it's basically the same
     # render js: id if params[:format] == "js"
-
   end
 
   def search
@@ -60,12 +60,12 @@ class GroupsController < ApplicationController
       @members = current_user.search(params[:user])
       if @members
         respond_to do |format|
-          format.js { render partial: "groups/member_result" }
+          format.js { render partial: "javascripts/groups/member_result" }
         end
       else
         respond_to do |format|
           flash.now[:alert] = "User is not in your friendlist"
-          format.js { render partial: "groups/member_result" }
+          format.js { render partial: "javascripts/groups/member_result" }
         end
       end
     else
@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
         @group = current_user.groups.find(params[:group_id])
         @members = []
         flash.now[:alert] = "Please enter a friend name or email to search"
-        format.js { render partial: "groups/member_result" }
+        format.js { render partial: "javascripts/groups/member_result" }
       end
     end
   end
