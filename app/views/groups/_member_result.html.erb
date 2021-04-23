@@ -6,10 +6,10 @@
       <% end %>
     </div>
     <div class="col-md-4">
-      <strong style="color:white"> Name: </strong> <span style="color:white"> <%= member.full_name %></span>
+      <strong> Name: </strong> <span> <%= member.full_name %></span>
     </div>
     <div class="col-md-5">
-      <strong style="color:white"> Email: </strong> <span style="color:white"> <%= member.email %></span>
+      <strong> Email: </strong> <span> <%= member.email %></span>
     </div>
     <div class="col-md-1">
       <%= link_to "Add", group_create_user_path(user: member), class: "btn btn-sm btn-success", method: :post, remote: true %>
