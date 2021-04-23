@@ -4,10 +4,10 @@ class Group < ApplicationRecord
   # * Relationship with members (Many to Many)
   has_and_belongs_to_many :users
 
+  # has_many :groupsusers, class_name: "GroupsUser", dependent: :destroy
+
   validates :name, presence: true, uniqueness: true
   validate :members_uniqness, :friends_only
-
-  private
 
   def members_uniqness
     errors.add(:user, "You cannot repeat a member in a group.") unless user_ids.uniq == user_ids
@@ -23,5 +23,9 @@ class Group < ApplicationRecord
         errors.add(:user, "##{user.id} #{user.full_name} is not in your friend list") unless owner.friend_with? user_id
       end
     }
+  end
+
+  def group_member?(id_of_member)
+    self.users.where(id: id_of_member).exists?
   end
 end

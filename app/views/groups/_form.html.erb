@@ -1,16 +1,24 @@
-<div class='text-center'>
-  <% @group.errors.full_messages.each do |message| %>
-    <div><%= message %></div>
+<div class="card mt-3">
+  <div class="card-header">
+    <h3>
+      <i class="bi bi-people-fill"></i>
+      Add a new Group
+    </h3>
+  </div>
+  <div class='text-center'>
+    <% @group.errors.full_messages.each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%= form_with model: @group do |form| %>
+    <div class="d-flex g-3 justify-content-sm-center mt-5 mb-5">
+      <div class="col-9 align-self-center m-2">
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter a group name to add", autofocus: true %>
+      </div>
+      <div class="col-1 align-self-center">
+        <%= form.submit "Add", class: "btn btn", style:"background-color: #FF5A01; color: white" %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= form_with model: @group do |form| %>
-  <div class="d-flex g-3 justify-content-sm-center mt-5 mb-3">
-    <div class="col-6 align-self-center m-2">
-      <%= form.text_field :name, class: "form-control", placeholder: "Enter group name", autofocus: true %>
-    </div>
-    <div class="col-1 align-self-center">
-      <%= form.submit "Add", class: "btn btn-primary" %>
-    </div>
-  </div>
-<% end %>
