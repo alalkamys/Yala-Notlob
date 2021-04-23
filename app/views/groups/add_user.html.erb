@@ -14,7 +14,7 @@
   <div class="col-sm-4 mb-3 mt-4">
     <div class="card bg-light">
       <h3>
-        <div class="card-header card-custom">My Groups</div>
+        <div class="card-header card-custom text-center">My Groups</div>
       </h3>
       <div class="card-body">
         <%= render @groups %>
@@ -26,7 +26,7 @@
   <div class="col-sm-8 mb-3 mt-4">
     <div class="card bg-light">
       <h3>
-        <div class="card-header card-custom"><%= @selected_group.name %></div>
+        <div class="card-header card-custom text-center"><%= @selected_group.name %></div>
       </h3>
 
       <%= form_tag group_search_user_path, remote: true, method: :get do %>

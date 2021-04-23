@@ -1,37 +1,53 @@
-<h1>Orders</h1>
-<%= link_to "Create new order", new_order_path %>
-<div class="row col-md-12 m-3 mt-5">
-    <div class="row col-md-3 ">
-        <table class="table text-center ">
-            <thead class="table-dark">
-                <tr>
-                    <th>Order</th>
-                    <th>Restaurante</th>
-                    <th>Invited</th>
-                    <th>Joined</th>
-                    <th>Status</th>
-                    <th colspan="3">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%  @orders.each do |order|   %>
-                <tr>
-                    <td><%= order.mealtype %></td>
-                    <td><%= order.resturant_name %></td>
-                    <td><%= order.invited_members.count %></td>
-                    <td><%= order.invited_members.where(joind: true).count %></td>
-                    <td><%= order.status %></td>
-                    <% if order.user == current_user && order.status == "Active" %>
-                        <td><%= link_to "View", order %></td>
-                        <td><%= link_to "Finish", order %></td>
-                        <td><%= link_to "Cancel", order %></td>
-                    <% else %>
-                        <td><%= link_to "View", order %></td>
-                    <% end %>
 
-                </tr>
-            <% end %>
-            </tbody>
-        </table>
+<%####################################%>
+<div class="card mt-5">
+    <div class="card-header text-center">
+        <h3>
+        <i class="bi bi-clipboard-check"></i>
+            Orders
+        </h3>
     </div>
+    <div class="card-body">
+          <%= button_to "Create new order", new_order_path, :method => "get", class:"btn btn-success btn-lg btn-block", style:"color:white" %>
+    </div>
+</div>
+
+<%####################################%>
+<style>
+  .thead-cusom{
+    background-color: #FF5A01;
+    color: white;
+  }
+</style>
+<div class="card mt-4">
+<table class="table text-center ">
+  <thead class="thead-cusom">
+    <tr>
+      <th scope="col">Order</th>
+      <th scope="col">Restaurante</th>
+      <th scope="col">Invited</th>
+      <th scope="col">Joined</th>
+      <th scope="col">Status</th>
+      <th scope="col" colspan="3">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.mealtype %></td>
+      <td><%= order.resturant_name %></td>
+      <td><%= order.invited_members.count %></td>
+      <td><%= order.invited_members.where(joind: true).count %></td>
+      <td><%= order.status %></td>
+      <% if order.user == current_user && order.status == "Active" %>
+        <td><%= link_to "View", order %></td>
+        <td><%= link_to "Finish", order %></td>
+        <td><%= link_to "Cancel", order %></td>
+    <% else %>
+        <td><%= link_to "View", order %></td>
+    <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>
