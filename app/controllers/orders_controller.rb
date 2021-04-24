@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
+    puts("inside destroy order--------------------------")
     respond_to do |format|
       format.js { render partial: "javascripts/orders/cancel_order" }
     end

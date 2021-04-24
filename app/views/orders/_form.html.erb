@@ -30,7 +30,7 @@
             <%# </div> %>
             <% @friends.each do |friend| %>
               <div>
-                <%= form.label :friend %><br>
+                <%= form.label :"type friends email to invite" %><br>
                 <%= form.text_field :user, value: friend.friend.email,:readonly => true %><br>
               </div>
             <% end %>

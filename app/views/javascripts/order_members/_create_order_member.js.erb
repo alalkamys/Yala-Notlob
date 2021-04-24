@@ -1,0 +1,21 @@
+console.log("fired")
+console.log("<%= @order_members.id %>")
+console.log("<%= @order.id %>")
+body = document.getElementById("items_table_body")
+console.log(body)
+row_created = body.insertRow();
+row_created.id = "item_<%= @order_members.id %>"
+user = row_created.insertCell(0);
+item = row_created.insertCell(1);
+amount = row_created.insertCell(2);
+price = row_created.insertCell(3);
+comment = row_created.insertCell(4);
+action = row_created.insertCell(5);
+user.innerHTML = "<%= @order_members.user.full_name %>";
+item.innerHTML = "<%= @order_members.item %>";
+amount.innerHTML = "<%= @order_members.amount %>";
+price.innerHTML = "<%= @order_members.price %>";
+comment.innerHTML = "<%= @order_members.comment %>";
+<%  if @order_members.user.id == current_user.id and @order.status == "Active" %>
+action.innerHTML = '<%= link_to "Delete Item", [@order_members.order, @order_members], remote: true, method: :delete, data: { confirm: "Are you sure?" } %>'
+<% end %>

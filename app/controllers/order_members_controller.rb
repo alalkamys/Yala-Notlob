@@ -17,7 +17,9 @@ class OrderMembersController < ApplicationController
     puts("--------------------------------------------------------------")
 
     # @order_members = @order.order_members.create(item: params[:order_member][:item], amount: params[:order_member][:amount], price: params[:order_member][:price], comment: params[:order_member][:comment], user: current_user)
-    redirect_to order_path(@order)
+    respond_to do |format|
+      format.js { render partial: "javascripts/order_members/create_order_member" }
+    end
   end
 
   def destroy

@@ -1,4 +1,4 @@
-<%= form_with model: [ @order, @order.order_members.build ] do |form| %>
+<%= form_with(model: [ @order, @order.order_members.build ], local:false) do |form| %>
     
     <%= form.label :Item %>
     <%= form.text_field :item, :required => true %>
