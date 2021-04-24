@@ -1,6 +1,6 @@
 <h1>Order Details</h1>
 <div class="row col-md-12 m-3 mt-5">
-    <div class="row col-md-3 ">
+    <div class="row col-md-8 ">
         <table class="table text-center ">
             <thead class="table-dark">
                 <tr>
@@ -30,9 +30,16 @@
             </tbody>
         </table>
     </div>
+    <div class="col-md-3 m-5 mt-5">
+    <%= @invited %> friends invited<%#= link_to 'click to view', @order.id, method: :get %><br>
+    <%= @joind %> friends joind<%#= link_to 'click to view', @order.id, method: :get %>
+    </div>
+
 </div>
 
+<div class="row col-md-12 m-3 mt-5">
 <%  if @order.invited_members.where(joind: true).map(&:user_id).include? current_user.id or @order.user.id == current_user.id and @order.status == "Active" %>
 <h1>Add Item</h1>
 <%= render "form_item" %>
 <% end %>
+</div>

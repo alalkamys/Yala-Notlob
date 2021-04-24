@@ -7,6 +7,8 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @Items = OrderMember.where(order: @order)
+    @invited = InvitedMember.where(order_id: @order.id).count
+    @joind = InvitedMember.where(joind: true).where(order_id: @order.id).count
   end
 
   def new
