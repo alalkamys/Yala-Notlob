@@ -24,21 +24,21 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def put
-  #   @order = Order.find(params[:id])
-  #   @order.status = "finish"
-  #   # @order.save
-  #   puts("here to finish it :::::::")
-  #   puts(params)
-  #   puts("here to finish it :::::::")
-  #   respond_to do |format|
-  #     format.js { render partial: "javascripts/orders/finish_order" }
-  #   end
-  # end
+  def update
+    @order = Order.find(params[:id])
+    @order.status = "finish"
+    @order.save
+    puts("here to finish it :::::::")
+    puts(params)
+    puts("here to finish it :::::::")
+    respond_to do |format|
+      format.js { render partial: "javascripts/orders/finish_order" }
+    end
+  end
 
   def destroy
     @order = Order.find(params[:id])
-    # @order.destroy
+    @order.destroy
     puts("here to cancel it :::::::")
     puts(params)
     puts("here to cancel it :::::::")
