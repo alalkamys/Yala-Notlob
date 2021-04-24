@@ -16,6 +16,11 @@ class User < ApplicationRecord
   # * Relationship with group ownership
   has_many :groups, foreign_key: :owner_id, dependent: :destroy
 
+  # * Relationship with Notification ownership
+  has_many :sender_notifications, class_name: 'Notification', foreign_key: 'sender_id'
+
+  has_many :receiver_notifications, class_name: 'Notification', foreign_key: 'receiver_id'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

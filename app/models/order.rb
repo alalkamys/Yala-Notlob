@@ -7,4 +7,7 @@ class Order < ApplicationRecord
 
   # Relationship with invited member
   has_many :invited_members
+  
+  # Relationship with invited member
+  has_many :notifications, dependent: :destroy
 end

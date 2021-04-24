@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_190853) do
+ActiveRecord::Schema.define(version: 2021_04_24_221138) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "friend_id"
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(version: 2021_04_21_190853) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_invited_members_on_order_id"
     t.index ["user_id"], name: "index_invited_members_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "receiver_id", null: false
+    t.integer "order_id", null: false
+    t.integer "sender_id", null: false
+    t.boolean "viewed"
+    t.integer "notification_type", default: 0
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_notifications_on_order_id"
+    t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
   end
 
   create_table "order_members", force: :cascade do |t|
@@ -87,6 +101,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_190853) do
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "invited_members", "orders"
   add_foreign_key "invited_members", "users"
+  add_foreign_key "notifications", "orders"
   add_foreign_key "order_members", "orders"
   add_foreign_key "order_members", "users"
   add_foreign_key "orders", "users"
