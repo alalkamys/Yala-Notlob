@@ -26,11 +26,8 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    @order.status = "finish"
+    @order.status = "Finish"
     @order.save
-    puts("here to finish it :::::::")
-    puts(params)
-    puts("here to finish it :::::::")
     respond_to do |format|
       format.js { render partial: "javascripts/orders/finish_order" }
     end
@@ -39,9 +36,6 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    puts("here to cancel it :::::::")
-    puts(params)
-    puts("here to cancel it :::::::")
     respond_to do |format|
       format.js { render partial: "javascripts/orders/cancel_order" }
     end
