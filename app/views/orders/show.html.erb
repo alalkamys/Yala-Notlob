@@ -9,16 +9,22 @@
                     <th>Amount</th>
                     <th>Price</th>
                     <th>Comment</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
             <%  @Items.each do |item|   %>
-                <tr>
+                <tr id = "item_<%= item.id %>">
                     <td><%= item.user.full_name %></td>
                     <td><%= item.item %></td>
                     <td><%= item.amount %></td>
                     <td><%= item.price %></td>
                     <td><%= item.comment %></td>
+                    <%  if item.user.id == current_user.id and @order.status == "Active" %>
+                    <th><%= link_to 'Delete Item', [item.order, item], remote: true,
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></th>
+                    <% end %>
                 </tr>
             <% end %>
             </tbody>
@@ -26,5 +32,7 @@
     </div>
 </div>
 
+<%  if @order.invited_members.where(joind: true).map(&:user_id).include? current_user.id or @order.user.id == current_user.id and @order.status == "Active" %>
 <h1>Add Item</h1>
 <%= render "form_item" %>
+<% end %>

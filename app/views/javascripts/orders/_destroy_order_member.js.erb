@@ -1,0 +1,8 @@
+console.log("fired")
+console.log("<%= @order_members.id %>")
+const row = document.getElementById("item_<%= @order_members.id %>")
+console.log(row)
+row.addEventListener("ajax:success", () => {
+console.log("ajax success")
+row.remove()
+})
