@@ -33,16 +33,20 @@
   </thead>
   <tbody>
    <% @orders.each do |order| %>
-    <tr>
+    <tr id="<%= order.id %>">
       <td><%= order.mealtype %></td>
       <td><%= order.resturant_name %></td>
       <td><%= order.invited_members.count %></td>
       <td><%= order.invited_members.where(joind: true).count %></td>
       <td><%= order.status %></td>
       <% if order.user == current_user && order.status == "Active" %>
-        <td><%= link_to "View", order %></td>
-        <td><%= link_to "Finish", order %></td>
-        <td><%= link_to "Cancel", order %></td>
+        <td class="view"><%= link_to "View", order %></td>
+        <td class="finish"><%= link_to 'Finish', [order], remote: true,
+                    method: :put,
+                    data: { confirm: "Are you sure?" } %></th>
+        <td class="cancel"><%= link_to 'Cancel', [order], remote: true,
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></th>
     <% else %>
         <td><%= link_to "View", order %></td>
     <% end %>

@@ -4,9 +4,9 @@ class CreateOrderMembers < ActiveRecord::Migration[6.1]
       t.references :order, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.string :comment
-      t.string :item
-      t.integer :amount
-      t.float :price
+      t.string :item, null: false
+      t.integer :amount, null: false
+      t.float :price, null: false
 
       t.timestamps
     end

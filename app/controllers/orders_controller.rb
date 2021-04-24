@@ -24,14 +24,27 @@ class OrdersController < ApplicationController
     end
   end
 
-  def finish
-    @order = Order.find(params[:id])
-    @Items = OrderMember.joins(:order)
-  end
+  # def put
+  #   @order = Order.find(params[:id])
+  #   @order.status = "finish"
+  #   # @order.save
+  #   puts("here to finish it :::::::")
+  #   puts(params)
+  #   puts("here to finish it :::::::")
+  #   respond_to do |format|
+  #     format.js { render partial: "javascripts/orders/finish_order" }
+  #   end
+  # end
 
-  def cancel
+  def destroy
     @order = Order.find(params[:id])
-    @Items = OrderMember.joins(:order)
+    # @order.destroy
+    puts("here to cancel it :::::::")
+    puts(params)
+    puts("here to cancel it :::::::")
+    respond_to do |format|
+      format.js { render partial: "javascripts/orders/cancel_order" }
+    end
   end
 
   private

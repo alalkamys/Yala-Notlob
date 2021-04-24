@@ -1,0 +1,8 @@
+console.log("fired")
+console.log("<%= @order.id %>")
+var row = document.getElementById("<%= @order.id %>")
+console.log(row)
+row.addEventListener("ajax:success", () => {
+console.log("ajax success")
+row.remove()
+})
