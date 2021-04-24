@@ -1,16 +1,15 @@
 <%= form_with model: [ @order, @order.order_members.build ] do |form| %>
     
     <%= form.label :Item %>
-    <%= form.text_field :item %>
+    <%= form.text_field :item, :required => true %>
     <%= form.label :Amount %>
-    <%= form.number_field :amount %>
+    <%= form.number_field :amount, min: 0, :required => true %>
     <%= form.label :Price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, step: :any, min: 0, :required => true %>
     <%= form.label :Comment %>
     <%= form.text_field :comment %>
-    
     <div>
-      <%= form.submit %>
+      <%= form.submit :Add %>
     </div>
   <% end %>
   
