@@ -5,5 +5,6 @@ console.log(row)
 row.addEventListener("ajax:success", () => {
 console.log("ajax success")
 row.querySelector(".finish").innerHTML="Finished!"
+row.querySelector(".status").innerHTML="Finish"
 row.querySelector(".cancel").remove()
 })

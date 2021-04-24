@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
       format.js { render partial: "javascripts/orders/finish_order" }
     end
   end
-
+  
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
@@ -45,6 +45,6 @@ class OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:mealtype, :resturant_name, :menu_img).merge(user: current_user)
+      params.require(:order).permit(:mealtype, :resturant_name, :menu_img, :option).merge(user: current_user)
     end
 end
