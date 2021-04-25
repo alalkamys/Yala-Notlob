@@ -1,0 +1,16 @@
+<ul class="list-group">
+    <% current_user.receiver_notifications.each do |notification| %>
+        <% if notification.notification_type == "invitation" %>
+            <li class="list-group-item">
+                <a class="" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>">
+                <%= notification.sender.full_name %> Has Invited You to His Order
+                </a>
+            </li>
+        <% else %>
+            <li class="list-group-item">
+                <a class="" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>">
+                 <%= notification.sender.full_name %> Joined Your <%= notification.order.mealtype %> </a>
+            </li>
+        <% end %>
+    <% end %>
+</ul>
