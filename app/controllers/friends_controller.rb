@@ -9,7 +9,7 @@ class FriendsController < ApplicationController
       candidate_friend_instance = Friendship.new friend_id: candidate_friend.id, user_id: current_user.id
       if candidate_friend_instance.save
         flash[:info] = "#{candidate_friend.full_name} is added"
-        Notification.notify_invite(1)
+       
         new_friend = {
           id: candidate_friend.id,
           full_name: candidate_friend.full_name,
