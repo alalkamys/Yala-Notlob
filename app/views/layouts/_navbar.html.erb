@@ -59,7 +59,7 @@
 
         <ul class="navbar-nav mr-5 ml-5">
           <li class="nav-item dropdown mr-4">
-            <a class="nav-link " href="#" id="billDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            <a class="nav-link" href="#" id="billDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
               <% if new_notifications.count > 0 %>
                 <h3 id="bell" class="bi bi-bell-fill" aria-hidden="true" style="color:purple;"></h3>
               <% else %>
@@ -81,11 +81,12 @@
                   <% else %>
                     <a class="dropdown-item font-weight-bold" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>"> <%= notification.sender.full_name %> Joined Your <%= notification.order.mealtype %> </a>
                   <% end %>
-                  <div class="dropdown-divider"></div>
+                  
                 <% end %>
 
         
               </div>
+              <div class="dropdown-divider"></div>
               <% if new_notifications.count == 0 %>
                 <p id="no-new-notification" class="text-center"> No New Notifications </p>
                 <div class="dropdown-divider"></div>
@@ -99,5 +100,5 @@
 
       </div>
     </nav>
-
+   
   <% end %>

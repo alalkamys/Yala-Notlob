@@ -53,4 +53,8 @@ class Notification < ApplicationRecord
 
     ActionCable.server.broadcast("notification_channel_#{new_notification.receiver_id}", data)
   end
+
+  
+    ActionCable.server.broadcast("notification_channel_#{new_notification.receiver_id}", data)
+  end
 end
