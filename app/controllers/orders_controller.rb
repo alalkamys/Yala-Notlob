@@ -38,14 +38,44 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    puts("inside destroy order--------------------------")
     respond_to do |format|
       format.js { render partial: "javascripts/orders/cancel_order" }
     end
   end
 
+  def order_Invited
+    @order = Order.find(params[:order_id])
+    @invited_users = InvitedMember.where(order_id: @order.id)
+  end
+
+  def order_Joined
+    @order = Order.find(params[:order_id])
+    @joined_users = InvitedMember.where(order_id: @order.id).where(joind: true)
+  end
+
+  def remove_Invited
+    @id = params[:invited_id] 
+    invited_member = InvitedMember.find(@id)
+    invited_member.destroy
+    respond_to do |format|
+      format.js { render partial: "javascripts/orders/remove_user" }
+    end
+  end
+
+  def remove_Joined
+    @order = Order.find(params[:order_id])
+    @id = params[:invited_id] 
+    invited_member = InvitedMember.find(@id)
+    invited_member.destroy
+    respond_to do |format|
+      format.js { render partial: "javascripts/orders/remove_user" }
+    end
+  end
+
+
+
   private
     def order_params
-      params.require(:order).permit(:mealtype, :resturant_name, :menu_img, :option).merge(user: current_user)
+      params.require(:order).permit(:mealtype, :resturant_name, :menu_img, :option, :joined_id, :invited_id).merge(user: current_user)
     end
 end

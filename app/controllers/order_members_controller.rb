@@ -31,7 +31,6 @@ class OrderMembersController < ApplicationController
       format.js { render partial: "javascripts/orders/destroy_order_member" }
     end
   end
-
   private
     def order_members_params
       params.require(:order_member).permit(:item, :amount, :price, :comment).merge(user: current_user)
