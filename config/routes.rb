@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # get 'groups/add_user'
   # get 'groups/create_user'
   # get 'groups/destroy_user'
+  get "search_user_to_invite", to: "orders#search"
 
   resources :friends
   resources :groups do

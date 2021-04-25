@@ -13,12 +13,11 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @friends = Friendship.where(user_id: current_user.id)
+    @friends = {}
   end
 
   def create
     @order = Order.new(order_params)
-    @friends = Friendship.where(user_id: current_user.id)
     if @order.save
       redirect_to @order
     else
@@ -35,6 +34,30 @@ class OrdersController < ApplicationController
     end
   end
   
+  def search
+    if params[:user].present?
+      @group = current_user.groups.find(params[:group_id])
+      @members = current_user.search(params[:user])
+      if @members
+        respond_to do |format|
+          format.js { render partial: "javascripts/groups/member_result" }
+        end
+      else
+        respond_to do |format|
+          flash.now[:alert] = "User is not in your friendlist"
+          format.js { render partial: "javascripts/groups/member_result" }
+        end
+      end
+    else
+      respond_to do |format|
+        @group = current_user.groups.find(params[:group_id])
+        @members = []
+        flash.now[:alert] = "Please enter a friend name or email to search"
+        format.js { render partial: "javascripts/groups/member_result" }
+      end
+    end
+  end
+
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
