@@ -1,4 +1,4 @@
 class NotificationsController < ApplicationController
-    def show
-    end
+  def show
+  end
 end
