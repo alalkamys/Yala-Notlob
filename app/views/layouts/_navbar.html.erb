@@ -19,7 +19,7 @@
       <% # Dropdown %>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="navbar-nav ml-5 mr-auto">
+        <ul class="navbar-nav ml-5 mr-5">
           <li class="nav-item">
              <b><%= link_to "Orders", orders_path, class: "nav-link" %></b>
           </li>
@@ -31,13 +31,13 @@
           </li>
         </ul>
 
-        <form class="form-inline ml-0 ">
+        <!-- <form class="form-inline ml-0 ">
           <input class="form-control mr-sm-2" type="search" placeholder="Search for orders..." aria-label="Search">
           <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        </form> -->
 
-        <span class="nav-item ml-auto" style="color: #ffff;">Welcome <%= current_user.full_name %> !</span>
-        <ul class="navbar-nav mr-1">
+        <span class="nav-item ml-5" style="color: #ffff;">Welcome <%= current_user.full_name %> !</span>
+        <ul class="navbar-nav ">
           <li class="nav-item dropdown mr-4">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
               <img src="<%= current_user.get_image %>" width="50" height="50" class="rounded-circle">
@@ -51,9 +51,50 @@
             </div>
           </li>
         </ul>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-bell mr-5" viewBox="0 0 16 16">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-bell-fill  mr-5" viewBox="0 0 16 16">
           <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-        </svg>
+        </svg> -->
+
+        <% new_notifications = current_user.receiver_notifications.where(viewed: false) %>
+
+        <ul class="navbar-nav mr-5 ml-5">
+          <li class="nav-item dropdown mr-4">
+            <a class="nav-link " href="#" id="billDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+              <% if new_notifications.count > 0 %>
+                <h3 id="bell" class="bi bi-bell-fill" aria-hidden="true" style="color:purple;"></h3>
+              <% else %>
+                <h3 id="bell" class="bi bi-bell-fill" aria-hidden="true"></h3>
+            <% end %> 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="billDropdown">
+              <div class="notifications-container">
+                <!-- <a class="dropdown-item" href="#">Dashboard</a>
+                <div class="dropdown-divider"></div>
+                
+                <a class="dropdown-item" href="#">Profile</a> -->
+
+                <% new_notifications.each do |notification| %>
+                  <% if notification.notification_type == "invitation" %>
+                    <a class="dropdown-item font-weight-bold" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>">
+                    <%= notification.sender.full_name %> Has Invited You to His Order
+                    </a>
+                  <% else %>
+                    <a class="dropdown-item font-weight-bold" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>"> <%= notification.sender.full_name %> Joined Your <%= notification.order.mealtype %> </a>
+                  <% end %>
+                  <div class="dropdown-divider"></div>
+                <% end %>
+
+        
+              </div>
+              <% if new_notifications.count == 0 %>
+                <p id="no-new-notification" class="text-center"> No New Notifications </p>
+                <div class="dropdown-divider"></div>
+              <% end %>
+              <a class="dropdown-item" href="/notifications">View All Notifications</a>
+            </div>
+          </li>
+        </ul>
+        
         <% # End Dropdown %>
 
       </div>
