@@ -4,7 +4,7 @@ class InvitedUsers
     end
 
     def self.add element
-        if @@the_array
+        if @@the_array and !@@the_array.include? element
             @@the_array << element
         else
             @@the_array = [element]
