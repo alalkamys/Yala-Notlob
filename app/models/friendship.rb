@@ -2,6 +2,8 @@ class Friendship < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: :User
 
+  # has_many :groups_users
+
   validates :user_id, uniqueness: { scope: :friend_id, message: "You already have this user as a friend" }
   validate :cannot_add_self
 

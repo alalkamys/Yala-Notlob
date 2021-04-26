@@ -2,9 +2,14 @@ class Group < ApplicationRecord
   # * Relationship with owner (One to Many)
   belongs_to :owner, class_name: "User"
   # * Relationship with members (Many to Many)
-  has_and_belongs_to_many :users
+  # has_and_belongs_to_many :users
 
-  # has_many :groupsusers, class_name: "GroupsUser", dependent: :destroy
+    # has_many :groups_users, class_name: "GroupsUser", dependent: :destroy
+  # has_and_belongs_to_many :users ,    :through => :groups_users ,dependent: :delete_all
+
+
+  # * Relationship with groups-users ownership
+  # has_many :groups_users, dependent: :delete_all
 
   validates :name, presence: true, uniqueness: true
   validate :members_uniqness, :friends_only
