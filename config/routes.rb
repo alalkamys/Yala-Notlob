@@ -16,6 +16,19 @@ Rails.application.routes.draw do
   # get 'groups/create_user'
   # get 'groups/destroy_user'
   get "search_user_to_invite", to: "orders#search"
+  get "add_user_to_invited_list", to: "orders#addToInvitedList"
+  get "remove_user_from_invited_list", to: "orders#removeFromInvitedList"
+  # for invited and joined users
+  get 'orders/:order_id/invited', :to => 'orders#order_Invited', as: "order_invited"
+  get 'orders/:order_id/joined', :to => 'orders#order_Joined', as: "order_joined"
+  get 'orders/:order_id/joined', :to => redirect('/order_joined.html.erb')
+  get 'orders/:order_id/invited', :to => redirect('/order_invited.html.erb')
+
+  # for removing users from order
+  get 'orders/:order_id/joined/:invited_id', :to => 'orders#remove_Joined', as: "remove_joined"
+  get 'orders/:order_id/invited/:invited_id', :to => 'orders#remove_Invited', as: "remove_invited"
+
+
 
   resources :friends
   resources :groups do

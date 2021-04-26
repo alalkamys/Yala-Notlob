@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   def index
     # @orders = Order.where(user_id: current_user.id)
     @orders = Order.all
@@ -13,12 +14,17 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @friends = {}
+    InvitedUsers.clear()
+    @friends_to_invite = InvitedUsers.get()
   end
 
   def create
     @order = Order.new(order_params)
+    friends_to_invite = InvitedUsers.get()
     if @order.save
+      friends_to_invite.each do |user|
+        InvitedMember.create(order: @order, user: user, joind: false)
+      end
       redirect_to @order
     else
       render :new
@@ -36,16 +42,16 @@ class OrdersController < ApplicationController
   
   def search
     if params[:user].present?
-      @group = current_user.groups.find(params[:group_id])
+      # @group = current_user.groups.find(params[:group_id])
       @members = current_user.search(params[:user])
       if @members
         respond_to do |format|
-          format.js { render partial: "javascripts/groups/member_result" }
+          format.js { render partial: "javascripts/orders/search_result" }
         end
       else
         respond_to do |format|
           flash.now[:alert] = "User is not in your friendlist"
-          format.js { render partial: "javascripts/groups/member_result" }
+          format.js { render partial: "javascripts/orders/search_result" }
         end
       end
     else
@@ -53,22 +59,70 @@ class OrdersController < ApplicationController
         @group = current_user.groups.find(params[:group_id])
         @members = []
         flash.now[:alert] = "Please enter a friend name or email to search"
-        format.js { render partial: "javascripts/groups/member_result" }
+        format.js { render partial: "javascripts/orders/search_result" }
       end
+    end
+  end
+
+  def addToInvitedList
+    if params[:user].present?
+      InvitedUsers.add(User.find(params[:user]))
+      puts(InvitedUsers.get())
+      @friends_to_invite = InvitedUsers.get()
+      render partial: "javascripts/orders/invitation_list"
+    end
+  end
+
+  def removeFromInvitedList
+    if params[:user].present?
+      InvitedUsers.delete(User.find(params[:user]))
+      puts(InvitedUsers.get())
+      @friends_to_invite = InvitedUsers.get()
+      render partial: "javascripts/orders/invitation_list"
     end
   end
 
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    puts("inside destroy order--------------------------")
     respond_to do |format|
       format.js { render partial: "javascripts/orders/cancel_order" }
     end
   end
 
+  def order_Invited
+    @order = Order.find(params[:order_id])
+    @invited_users = InvitedMember.where(order_id: @order.id)
+  end
+
+  def order_Joined
+    @order = Order.find(params[:order_id])
+    @joined_users = InvitedMember.where(order_id: @order.id).where(joind: true)
+  end
+
+  def remove_Invited
+    @id = params[:invited_id] 
+    invited_member = InvitedMember.find(@id)
+    invited_member.destroy
+    respond_to do |format|
+      format.js { render partial: "javascripts/orders/remove_user" }
+    end
+  end
+
+  def remove_Joined
+    @order = Order.find(params[:order_id])
+    @id = params[:invited_id] 
+    invited_member = InvitedMember.find(@id)
+    invited_member.destroy
+    respond_to do |format|
+      format.js { render partial: "javascripts/orders/remove_user" }
+    end
+  end
+
+
+
   private
     def order_params
-      params.require(:order).permit(:mealtype, :resturant_name, :menu_img, :option).merge(user: current_user)
+      params.require(:order).permit(:mealtype, :resturant_name, :menu_img, :option, :joined_id, :invited_id).merge(user: current_user)
     end
 end

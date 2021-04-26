@@ -31,8 +31,8 @@
         </table>
     </div>
     <div class="col-md-3 m-5 mt-5">
-    <%= @order.invited_members.count %> friends invited<%#= link_to 'click to view', @order.id, method: :get %><br>
-    <%= @order.invited_members.where(joind: true).count %> friends joind<%#= link_to 'click to view', @order.id, method: :get %>
+    <%= @order.invited_members.count %> friends invited<%= link_to 'Click to View', order_invited_path(@order) %><br>
+    <%= @order.invited_members.where(joind: true).count %> friends joind<%= link_to 'Click to View', order_joined_path(@order) %>
     </div>
 
 </div>

@@ -1,0 +1,23 @@
+<% @friends_to_invite.each do |member| %>
+    <div class="col-md-4" id="<%= member.id %>">
+      <div class="row" style="top:0%, left:0%">
+        <div class="card mx-6 my-4">
+          <div class="card-body">
+            <div class="col-md-6">
+              <%= image_tag member.get_image, style: "height:80px;width:80;" %>
+            </div>
+            <div class="col-md-6">
+              <br>
+              <h5>
+                <div class="badge badge-light"><%= member.full_name %></div>
+              </h5>
+              <hr/>
+              <div class="btn btn-danger btn-sm">
+                <%= link_to "Remove", remove_user_from_invited_list_path(user: member), :method =>"get", style: "color:white", remote: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

@@ -36,7 +36,7 @@
       </div>
 </div>
 <div class="col-md-5 mt-5 m-2">
-<% @friends.each do |friend| %>
+<% @friends_to_invite.each do |friend| %>
   <div>
     <%#= form.label :"type friends email to invite" %><br>
     <%#= form.text_field :user, value: friend.friend.email,:readonly => true %><br>
@@ -49,17 +49,17 @@
         <div class="card-header card-custom text-center">Invited Friends</div>
       </h3>
 
-      <%= form_with(url:search_user_to_invite_path, local: false, method: get) do |form| %>
+      <%= form_tag search_user_to_invite_path, remote: true, method: :get do %>
 
         <div class="form-group d-flex justify-content-between">
           <div class="col-3 align-self-center m-auto">
-            <%= label :name, "Invite a Friend to This order", class: "col-form-label fw-bold" %>
+            <%= label :name, "Invite Friends to this orders", class: "col-form-label fw-bold" %>
           </div>
           <div class="col-sm-8 m-2 align-self-center">
-            <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email to invite to this order", autofocus: true, class: "form-control" %>
+            <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email / group to invite", autofocus: true, class: "form-control" %>
           </div>
           <div class="col-2 align-self-center m-auto d-none">
-            <input type="submit" value="Add" class="btn btn-success btn-lg" id="btn-img">
+            <input type="submit" value="Search" class="btn btn-success btn-lg" id="btn-img">
           </div>
         </div>
       <% end %>
@@ -71,30 +71,7 @@
       </div>
       <%# -----------------------Selected Group Members----------------------- %>
       <div class="row" style="top:0%, left:0%">
-        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="member-results">
-          <% @friends.each do |member| %>
-            <div class="col-md-4" id="<%= member.id %>">
-              <div class="row" style="top:0%, left:0%">
-                <div class="card mx-6 my-4">
-                  <div class="card-body">
-                    <div class="col-md-6">
-                      <%= image_tag member.get_image, style: "height:80px;width:80;" %>
-                    </div>
-                    <div class="col-md-6">
-                      <br>
-                      <h5>
-                        <div class="badge badge-light"><%= member.full_name %></div>
-                      </h5>
-                      <hr/>
-                      <div class="btn btn-danger btn-sm">
-                        <%= link_to "Remove", group_destroy_user_path(user_id: member.id), :method => "delete", style: "color:white", data: { confirm: "Are you sure?" }, remote: true %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="invitation_list">
         </div>
       </div>
 
