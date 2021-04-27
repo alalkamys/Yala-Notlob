@@ -2,12 +2,14 @@ class Group < ApplicationRecord
   # * Relationship with owner (One to Many)
   belongs_to :owner, class_name: "User"
   # * Relationship with members (Many to Many)
-  has_and_belongs_to_many :users
+  # has_many :users, :through => :groups_users
+  # has_many :groups_users
+  has_many :group_participants
 
   # has_many :groupsusers, class_name: "GroupsUser", dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
-  validate :members_uniqness, :friends_only
+  # validate :members_uniqness, :friends_only
 
   def members_uniqness
     errors.add(:user, "You cannot repeat a member in a group.") unless user_ids.uniq == user_ids
@@ -26,6 +28,6 @@ class Group < ApplicationRecord
   end
 
   def group_member?(id_of_member)
-    self.users.where(id: id_of_member).exists?
+    self.group_participants.where(user_id: id_of_member).exists?
   end
 end
