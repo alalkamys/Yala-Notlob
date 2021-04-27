@@ -44,7 +44,21 @@ class OrdersController < ApplicationController
     if params[:user].present?
       # @group = current_user.groups.find(params[:group_id])
       @members = current_user.search(params[:user])
-      if @members
+      puts(current_user.groups)
+      puts("------------------------------user group--------------------------")
+      @group = current_user.groups.where(name: params[:user]).limit(1)
+      puts(@group)
+      puts("------------------------------chossen group--------------------------")
+      if @group != []
+        @members = @group[0].users
+        if @members
+          puts("---------------render groups--------------------")
+          respond_to do |format|
+            format.js { render partial: "javascripts/orders/search_result" }
+          end
+        end  
+      elsif @members
+        puts("---------------render members--------------------")
         respond_to do |format|
           format.js { render partial: "javascripts/orders/search_result" }
         end
