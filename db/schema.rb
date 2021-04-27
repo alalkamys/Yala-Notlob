@@ -9,7 +9,6 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-
 ActiveRecord::Schema.define(version: 2021_04_25_100306) do
 
   create_table "friendships", force: :cascade do |t|
@@ -71,9 +70,9 @@ ActiveRecord::Schema.define(version: 2021_04_25_100306) do
     t.integer "order_id", null: false
     t.integer "user_id", null: false
     t.string "comment"
-    t.string "item"
-    t.integer "amount"
-    t.float "price"
+    t.string "item", null: false
+    t.integer "amount", null: false
+    t.float "price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_members_on_order_id"

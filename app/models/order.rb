@@ -3,10 +3,10 @@ class Order < ApplicationRecord
   belongs_to :user
 
   # Relationship with order_member
-  has_many :order_members
+  has_many :order_members, :dependent => :destroy
 
   # Relationship with invited member
-  has_many :invited_members
+  has_many :invited_members, :dependent => :destroy
   
   # Relationship with invited member
   has_many :notifications, dependent: :destroy

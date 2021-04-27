@@ -1,42 +1,81 @@
-<div class="card mt-5">
-  <div class="card-header text-center">
-    <h3>
-      <i class="bi bi-clipboard-plus"></i>
-      Create Order
-    </h3>
+<div class="row col-md-12">
+  <div class="card col-md-6  mt-5">
+      <div class="card-header text-center">
+          <h3>
+          <i class="bi bi-clipboard-plus"></i>
+              Create Order
+          </h3>
+      </div>
+      <div class="card-body">
+        <%# <form> %>
+          <%= form_with model: order do |form| %>
+            <div class="form-group">
+              <%= form.label :'Order for', class:"col-sm-3 col-form-label" %>
+              <%= form.select :mealtype, options_for_select(["Breakfast", "Launch", "Dinner", "Other"]), {}, {class: "form form-group form-control"}  %>
+            </div>
+            <div class="form-group">
+              <%= form.label :restaurant_name %><br>
+              <%= form.text_field :resturant_name, class:"form-control", placeholder: "Enter the restaurant name"%>
+              <% order.errors.full_messages_for(:resturant_name).each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+            <div class="custom-file mt-3">
+              <%= form.label :'Choose the menu image', class:"custom-file-label" %>
+            <%= form.file_field :menu_img, class:"custom-file-input" %>
+            </div>
+            <%# <div> %>
+              <%# <%= form.label :owner %>
+              <%#= form.text_field :user, value: current_user,:readonly => true %> 
+            <%# </div> %>
+            <div class="mt-5">
+              <%= form.submit :Submit, class:"btn btn-success btn-lg btn-block", style:"color:white" %>
+            </div>
+          <% end %>
+        <%# </form> %>
+      </div>
+</div>
+<div class="col-md-5 mt-5 m-2">
+<% @friends_to_invite.each do |friend| %>
+  <div>
+    <%#= form.label :"type friends email to invite" %><br>
+    <%#= form.text_field :user, value: friend.friend.email,:readonly => true %><br>
   </div>
-  <div class="card-body">
-    <% # <form> %>
-    <%= form_with model: order do |form| %>
-      <div class="form-group">
-        <%= form.label :'Order for', class: "col-sm-2 col-form-label" %>
-        <%= form.select :mealtype, options_for_select(["Breakfast", "Launch", "Dinner", "Other"]), {}, { class: "form form-group form-control" } %>
-      </div>
-      <div class="form-group">
-        <%= form.label :restaurant_name %><br>
-        <%= form.text_field :resturant_name, class: "form-control", placeholder: "Enter the restaurant name" %>
-        <% order.errors.full_messages_for(:resturant_name).each do |message| %>
-          <div><%= message %></div>
-        <% end %>
-      </div>
-      <div class="custom-file mt-3">
-        <%= form.label :'Choose the menu image', class: "custom-file-label" %>
-        <%= form.file_field :menu_img, class: "custom-file-input" %>
-      </div>
-      <% # <div> %>
-      <% # <%= form.label :owner %>
-      <% #= form.text_field :user, value: current_user,:readonly => true %>
-      <% # </div> %>
-      <% @friends.each do |friend| %>
-        <div>
-          <%= form.label :friend %><br>
-          <%= form.text_field :user, value: friend.friend.email, :readonly => true %><br>
+<% end %>
+<%# -----------------------Selecting a Group----------------------- %>
+  <div class="col-sm-8 mb-3 mt-4">
+    <div class="card bg-light">
+      <h3>
+        <div class="card-header card-custom text-center">Invited Friends</div>
+      </h3>
+
+      <%= form_tag search_user_to_invite_path, remote: true, method: :get do %>
+
+        <div class="form-group d-flex justify-content-between">
+          <div class="col-3 align-self-center m-auto">
+            <%= label :name, "Invite Friends to this orders", class: "col-form-label fw-bold" %>
+          </div>
+          <div class="col-sm-8 m-2 align-self-center">
+            <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email / group to invite", autofocus: true, class: "form-control" %>
+          </div>
+          <div class="col-2 align-self-center m-auto d-none">
+            <input type="submit" value="Search" class="btn btn-success btn-lg" id="btn-img">
+          </div>
         </div>
       <% end %>
-      <div class="mt-5">
-        <%= form.submit :Submit, class: "btn btn-success btn-lg btn-block", style: "color:white" %>
+
+      <%# -----------------------Searched Members Results----------------------- %>
+      <div class="row" style="top:0%, left:0%">
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="search-results">
+        </div>
       </div>
-    <% end %>
-    <% # </form> %>
-  </div>
+      <%# -----------------------Selected Group Members----------------------- %>
+      <div class="row" style="top:0%, left:0%">
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="invitation_list">
+        </div>
+      </div>
+
+      <%# -----------------------Including app/javascript/packs/ js files----------------------- %>
+      <%= javascript_pack_tag "orders/search_invited_user" %>
+</div>
 </div>
