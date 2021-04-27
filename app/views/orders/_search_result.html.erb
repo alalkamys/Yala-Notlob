@@ -1,0 +1,20 @@
+<% @members.each do |member| %>
+<% if current_user.friend_with?(member.id) %>
+    <div class="col-md-2">
+    <% if member.image? %>
+        <%= image_tag member.get_image, style: "height:50px;width:50;" %>
+    <% end %>
+    </div>
+    <div class="col-md-4">
+    <strong> Name: </strong> <span> <%= member.full_name %></span>
+    </div>
+    <div class="col-md-5">
+    <strong> Email: </strong> <span> <%= member.email %></span>
+    </div>
+    <div class="col-md-1">
+    <%= link_to "Add", add_user_to_invited_list_path(user: member), class: "btn btn-sm btn-success", method: :get, remote: true %>
+    </div>
+<% end %>
+<hr/>
+<hr/>
+<% end %>

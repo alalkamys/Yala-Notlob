@@ -2,7 +2,6 @@ class InvitedMember < ApplicationRecord
   belongs_to :order
   belongs_to :user 
 
-  validates :user_id, uniqueness: { scope: :user_id, message: "You already have this user invited" }
   validate :cannot_add_self
 
   def invited?(id)
