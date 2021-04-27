@@ -8,13 +8,6 @@
       <div class="row justify-content-center">
         <div class="col-md-10">
           <%= form.email_field :email, class: "form-control", placeholder: "Write an email to add friend" %>
-          <% if flash[:error] %>
-            <div class="error text-center alert alert-danger" style="margin-top: 10px; font-size: medium;"><%= flash[:error] %></div>
-          <% end %>
-          <% if flash[:info] %>
-            <div class="notice text-center alert alert-success" style="margin-top: 10px; font-size: medium;"><%= flash[:info] %></div>
-          <% end %>
-
         </div>
         <div class="col-md-1">
           <input type="submit" class="btn btn" id="friends-add-btn" style="background-color: #FF5A01; color: white" value="Add">
