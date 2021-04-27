@@ -9,8 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 2021_04_23_194013) do
+ActiveRecord::Schema.define(version: 2021_04_25_100306) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "friend_id"
@@ -18,6 +17,15 @@ ActiveRecord::Schema.define(version: 2021_04_23_194013) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["friend_id", "user_id"], name: "index_friendships_on_friend_id_and_user_id", unique: true
+  end
+
+  create_table "group_participants", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_participants_on_group_id"
+    t.index ["user_id"], name: "index_group_participants_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -42,6 +50,20 @@ ActiveRecord::Schema.define(version: 2021_04_23_194013) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_invited_members_on_order_id"
     t.index ["user_id"], name: "index_invited_members_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "receiver_id", null: false
+    t.integer "order_id", null: false
+    t.integer "sender_id", null: false
+    t.boolean "viewed"
+    t.integer "notification_type", default: 0
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_notifications_on_order_id"
+    t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
   end
 
   create_table "order_members", force: :cascade do |t|
@@ -84,9 +106,12 @@ ActiveRecord::Schema.define(version: 2021_04_23_194013) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "group_participants", "groups"
+  add_foreign_key "group_participants", "users"
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "invited_members", "orders"
   add_foreign_key "invited_members", "users"
+  add_foreign_key "notifications", "orders"
   add_foreign_key "order_members", "orders"
   add_foreign_key "order_members", "users"
   add_foreign_key "orders", "users"

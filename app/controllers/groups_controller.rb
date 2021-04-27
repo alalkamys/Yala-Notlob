@@ -28,14 +28,14 @@ class GroupsController < ApplicationController
     @groups = current_user.groups.all
     @selected_group_id = params[:group_id]
     @selected_group = Group.find @selected_group_id
-    @members = Group.find(@selected_group_id).users.all
-    @member = current_user.groups.find(@selected_group_id).users.new
+    @members = Group.find(@selected_group_id).group_participants.all.map { |group_participant| group_participant.user }
+    @member = current_user.groups.find(@selected_group_id).group_participants.new
     @group = Group.new
   end
 
   def create_user
     @member = User.find(params[:user])
-    @member = GroupsUser.new({ "user_id" => @member.id, "group_id" => params[:group_id] })
+    @member = GroupParticipant.new({ "user_id" => @member.id, "group_id" => params[:group_id] })
     if @member.save
       @member = User.find(params[:user])
       respond_to do |format|
@@ -45,7 +45,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy_user
-    GroupsUser.delete_by(user_id: params[:user_id], group_id: params[:group_id])
+    GroupParticipant.delete_by(user_id: params[:user_id], group_id: params[:group_id])
     @member_id = params[:user_id]
     respond_to do |format|
       format.js { render partial: "javascripts/groups/destroy_user" }

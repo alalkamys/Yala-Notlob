@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  order: one
+  user: one
+  viewed: false
+  type: 
+  read_at: 2021-04-24 23:52:06
+
+two:
+  user: two
+  order: two
+  user: two
+  viewed: false
+  type: 
+  read_at: 2021-04-24 23:52:06

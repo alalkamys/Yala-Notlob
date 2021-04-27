@@ -5,24 +5,48 @@ class FriendsController < ApplicationController
 
   def create
     candidate_friend = User.find_by email: params[:email]
+    # * user exists
     if candidate_friend
       candidate_friend_instance = Friendship.new friend_id: candidate_friend.id, user_id: current_user.id
+      # * user is valid
       if candidate_friend_instance.save
-        flash[:info] = "#{candidate_friend.full_name} is added"
+        Notification.notify_invite()
+
+        new_friend = {
+          id: candidate_friend.id,
+          full_name: candidate_friend.full_name,
+          image: candidate_friend.get_image(),
+          email: candidate_friend.email,
+        }
+        res = {
+          success: true,
+          new_friend: new_friend,
+        }
+        render json: res.to_json
       else
-        flash[:error] = candidate_friend_instance.errors[:user_id].first
+        res = {
+          success: false,
+          errors: candidate_friend_instance.errors[:user_id].first,
+        }
+        render json: res.to_json
       end
     else
-      flash[:error] = "User doesn't exist"
+      res = {
+        success: false,
+        errors: "User doesn't exist",
+      }
+      render json: res.to_json
     end
-    redirect_to friends_path
   end
 
-  # TODO Need to remove friends if exists in the user groups
   def destroy
-    @friend = Friendship.where(friend_id: params[:id], user_id: current_user.id).first
-    @friend.destroy
-    flash[:info] = "Friend Removed"
-    redirect_to friends_path
+    friend = User.find(params[:id])
+    @friend_name = friend.full_name 
+    @friend_id = params[:id]
+    @friendship_record = Friendship.where(friend_id: params[:id], user_id: current_user.id).first
+    @friendship_record.destroy
+    respond_to do |format|
+      format.js { render partial: "javascripts/friends/destroy_friend" }
+    end
   end
 end

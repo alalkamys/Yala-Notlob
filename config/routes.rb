@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     get "search_user", to: "groups#search"
   end
 
+  # * resource for notification
+  resources :notifications
+
   # * resource for order
   resources :orders do
     resources :order_members

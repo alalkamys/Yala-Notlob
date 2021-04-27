@@ -34,7 +34,6 @@
     <%= @order.invited_members.where(joind: false).count %> friends invited but not joined <%= link_to 'Click to View', order_invited_path(@order) %><br>
     <%= @order.invited_members.where(joind: true).count %> fsriends joind <%= link_to 'Click to View', order_joined_path(@order) %>
     </div>
-
 </div>
 
 <div class="row col-md-12 m-3 mt-5">
