@@ -6,7 +6,12 @@ class Group < ApplicationRecord
   # has_many :groups_users
   has_many :group_participants
 
-  # has_many :groupsusers, class_name: "GroupsUser", dependent: :destroy
+    # has_many :groups_users, class_name: "GroupsUser", dependent: :destroy
+  # has_and_belongs_to_many :users ,    :through => :groups_users ,dependent: :delete_all
+
+
+  # * Relationship with groups-users ownership
+  # has_many :groups_users, dependent: :delete_all
 
   validates :name, presence: true, uniqueness: true
   # validate :members_uniqness, :friends_only

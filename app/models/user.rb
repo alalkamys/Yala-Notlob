@@ -20,6 +20,8 @@ class User < ApplicationRecord
   # * Relationship with group ownership
   has_many :groups, foreign_key: :owner_id, dependent: :destroy
 
+  
+
   # * Relationship with Notification ownership
   has_many :sender_notifications, class_name: "Notification", foreign_key: "sender_id"
 
