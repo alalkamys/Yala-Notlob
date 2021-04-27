@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
 
   def order_Invited
     @order = Order.find(params[:order_id])
-    @invited_users = InvitedMember.where(order_id: @order.id)
+    @invited_users = InvitedMember.where(order_id: @order.id).where(joind: false)
   end
 
   def order_Joined
@@ -67,6 +67,10 @@ class OrdersController < ApplicationController
     @id = params[:invited_id] 
     invited_member = InvitedMember.find(@id)
     invited_member.destroy
+    order_member = @order.order_members.where(user_id: invited_member.user_id)
+  order_member.each do |item|
+    item.destroy
+  end
     respond_to do |format|
       format.js { render partial: "javascripts/orders/remove_user" }
     end
