@@ -11,15 +11,19 @@ class User < ApplicationRecord
   has_many :invited_members
 
   # * Relationship with group members
-  has_and_belongs_to_many :groups
+  # has_many :groups, :through => :groups_users
+  # has_many :groups_users
+
+  has_many :groups, :through => :groups_participants
+  has_many :group_participants
 
   # * Relationship with group ownership
   has_many :groups, foreign_key: :owner_id, dependent: :destroy
 
   # * Relationship with Notification ownership
-  has_many :sender_notifications, class_name: 'Notification', foreign_key: 'sender_id'
+  has_many :sender_notifications, class_name: "Notification", foreign_key: "sender_id"
 
-  has_many :receiver_notifications, class_name: 'Notification', foreign_key: 'receiver_id'
+  has_many :receiver_notifications, class_name: "Notification", foreign_key: "receiver_id"
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -41,13 +45,11 @@ class User < ApplicationRecord
   end
 
   def get_image
-    if image != ""
+    if image
       puts "========================================================"
       puts image
       puts "========================================================"
       return image
-     
-
     end
     # return 'https://img.icons8.com/cotton/72/gender-neutral-user--v1.png'
     gravatar_id = Digest::MD5::hexdigest(email).downcase
