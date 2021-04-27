@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_221138) do
+ActiveRecord::Schema.define(version: 2021_04_25_100306) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "friend_id"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 2021_04_24_221138) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["friend_id", "user_id"], name: "index_friendships_on_friend_id_and_user_id", unique: true
+  end
+
+  create_table "group_participants", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_participants_on_group_id"
+    t.index ["user_id"], name: "index_group_participants_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -98,6 +107,8 @@ ActiveRecord::Schema.define(version: 2021_04_24_221138) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "group_participants", "groups"
+  add_foreign_key "group_participants", "users"
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "invited_members", "orders"
   add_foreign_key "invited_members", "users"
