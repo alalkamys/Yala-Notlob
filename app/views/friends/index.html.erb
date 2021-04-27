@@ -9,32 +9,30 @@
     <div class="row " style="top:0%, left:0%">
       <div class="col-md-10 row overflow-auto m-auto mt-5" id="friends-container" style="top: 0%; left: 0%; max-height: 350px;">
 
-        
-          <% for friend in @friends %>
-            <div id="friend-<%= friend.id %>" class="col-md-4">
-              <div class="row" style="top:0%, left:0%">
-                <div class="card mx-5 my-3">
-                  <div class="card-body">
-                    <div class="col-md-6">
-                      <%= image_tag friend.get_image, style: "height:120px;width:120;" %>
-                    </div>
-                    <div class="col-md-12">
-                      <br>
-                      <h4>
-                        <div class="badge badge-light"> <%= friend.full_name %></div>
-                      </h4>
-                      <hr/>
-                      <div class="btn btn-danger btn-sm"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16"><path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/><path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/></svg>
-                        <%= link_to "unfriend", friend_path(friend), style: "color: white", method: :delete, data: { confirm: "Are you sure?" } %>
-                      </div>
+        <% for friend in @friends %>
+          <div id="friend-<%= friend.id %>" class="col-md-4">
+            <div class="row" style="top:0%, left:0%">
+              <div class="card mx-5 my-3">
+                <div class="card-body">
+                  <div class="col-md-6">
+                    <%= image_tag friend.get_image, style: "height:120px;width:120;" %>
+                  </div>
+                  <div class="col-md-12">
+                    <br>
+                    <h4>
+                      <div class="badge badge-light"> <%= friend.full_name %></div>
+                    </h4>
+                    <hr/>
+                    <div class="btn btn-danger btn-sm"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16"><path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/><path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/></svg>
+                      <%= link_to "unfriend", friend_path(friend), style: "color: white", method: :delete, data: { confirm: "Are you sure?" }, remote: true %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          <% end %>
-          
-     
+          </div>
+        <% end %>
+
       </div>
     </div>
   </div>

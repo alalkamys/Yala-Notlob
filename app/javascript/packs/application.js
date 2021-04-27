@@ -3,15 +3,13 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
-import "bootstrap" // I added it here because the dropdown in navbar was not working, but now it works after add this line
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import Rails from "@rails/ujs";
+import Turbolinks from "turbolinks";
+import * as ActiveStorage from "@rails/activestorage";
+import "channels";
+import "bootstrap"; // I added it here because the dropdown in navbar was not working, but now it works after add this line
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-
-
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();

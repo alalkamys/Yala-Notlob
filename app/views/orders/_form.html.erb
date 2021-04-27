@@ -1,44 +1,42 @@
 <div class="card mt-5">
-    <div class="card-header text-center">
-        <h3>
-        <i class="bi bi-clipboard-plus"></i>
-            Create Order
-        </h3>
-    </div>
-    <div class="card-body">
-      <%# <form> %>
-        <%= form_with model: order do |form| %>
-          <div class="form-group">
-            <%= form.label :'Order for', class:"col-sm-2 col-form-label" %>
-            <%= form.select :mealtype, options_for_select(["Breakfast", "Launch", "Dinner", "Other"]), {}, {class: "form form-group form-control"}  %>
-          </div>
-          <div class="form-group">
-            <%= form.label :restaurant_name %><br>
-            <%= form.text_field :resturant_name, class:"form-control", placeholder: "Enter the restaurant name"%>
-            <% order.errors.full_messages_for(:resturant_name).each do |message| %>
-              <div><%= message %></div>
-            <% end %>
-          </div>
-          <div class="custom-file mt-3">
-            <%= form.label :'Choose the menu image', class:"custom-file-label" %>
-          <%= form.file_field :menu_img, class:"custom-file-input" %>
-          </div>
-          <%# <div> %>
-            <%# <%= form.label :owner %>
-            <%#= form.text_field :user, value: current_user,:readonly => true %> 
-          <%# </div> %>
-          <% @friends.each do |friend| %>
-            <div>
-              <%= form.label :friend %><br>
-              <%= form.text_field :user, value: friend.friend.email,:readonly => true %><br>
-            </div>
-          <% end %>
-          <div class="mt-5">
-            <%= form.submit :Submit, class:"btn btn-success btn-lg btn-block", style:"color:white" %>
-          </div>
+  <div class="card-header text-center">
+    <h3>
+      <i class="bi bi-clipboard-plus"></i>
+      Create Order
+    </h3>
+  </div>
+  <div class="card-body">
+    <% # <form> %>
+    <%= form_with model: order do |form| %>
+      <div class="form-group">
+        <%= form.label :'Order for', class: "col-sm-2 col-form-label" %>
+        <%= form.select :mealtype, options_for_select(["Breakfast", "Launch", "Dinner", "Other"]), {}, { class: "form form-group form-control" } %>
+      </div>
+      <div class="form-group">
+        <%= form.label :restaurant_name %><br>
+        <%= form.text_field :resturant_name, class: "form-control", placeholder: "Enter the restaurant name" %>
+        <% order.errors.full_messages_for(:resturant_name).each do |message| %>
+          <div><%= message %></div>
         <% end %>
-      <%# </form> %>
-    </div>
+      </div>
+      <div class="custom-file mt-3">
+        <%= form.label :'Choose the menu image', class: "custom-file-label" %>
+        <%= form.file_field :menu_img, class: "custom-file-input" %>
+      </div>
+      <% # <div> %>
+      <% # <%= form.label :owner %>
+      <% #= form.text_field :user, value: current_user,:readonly => true %>
+      <% # </div> %>
+      <% @friends.each do |friend| %>
+        <div>
+          <%= form.label :friend %><br>
+          <%= form.text_field :user, value: friend.friend.email, :readonly => true %><br>
+        </div>
+      <% end %>
+      <div class="mt-5">
+        <%= form.submit :Submit, class: "btn btn-success btn-lg btn-block", style: "color:white" %>
+      </div>
+    <% end %>
+    <% # </form> %>
+  </div>
 </div>
-
-  

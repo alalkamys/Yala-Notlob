@@ -1,29 +1,29 @@
 <h1>Order Details</h1>
 <div class="row col-md-12 m-3 mt-5">
-    <div class="row col-md-3 ">
-        <table class="table text-center ">
-            <thead class="table-dark">
-                <tr>
-                    <th>Person</th>
-                    <th>Item</th>
-                    <th>Amount</th>
-                    <th>Price</th>
-                    <th>Comment</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%  @Items.each do |item|   %>
-                <tr>
-                    <td><%= item.user.full_name %></td>
-                    <td><%= item.item %></td>
-                    <td><%= item.amount %></td>
-                    <td><%= item.price %></td>
-                    <td><%= item.comment %></td>
-                </tr>
-            <% end %>
-            </tbody>
-        </table>
-    </div>
+  <div class="row col-md-3 ">
+    <table class="table text-center ">
+      <thead class="table-dark">
+        <tr>
+          <th>Person</th>
+          <th>Item</th>
+          <th>Amount</th>
+          <th>Price</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @Items.each do |item| %>
+          <tr>
+            <td><%= item.user.full_name %></td>
+            <td><%= item.item %></td>
+            <td><%= item.amount %></td>
+            <td><%= item.price %></td>
+            <td><%= item.comment %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <h1>Add Item</h1>
