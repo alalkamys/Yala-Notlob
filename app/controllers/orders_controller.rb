@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   def index
     # @orders = Order.where(user_id: current_user.id)
     @orders = Order.all
@@ -13,13 +14,17 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @friends = Friendship.where(user_id: current_user.id)
+    InvitedUsers.clear()
+    @friends_to_invite = InvitedUsers.get()
   end
 
   def create
     @order = Order.new(order_params)
-    @friends = Friendship.where(user_id: current_user.id)
+    friends_to_invite = InvitedUsers.get()
     if @order.save
+      friends_to_invite.each do |user|
+        InvitedMember.create(order: @order, user: user, joind: false)
+      end
       redirect_to @order
     else
       render :new
@@ -35,6 +40,62 @@ class OrdersController < ApplicationController
     end
   end
   
+  def search
+    if params[:user].present?
+      # @group = current_user.groups.find(params[:group_id])
+      @members = current_user.search(params[:user])
+      puts(current_user.groups)
+      puts("------------------------------user group--------------------------")
+      @group = current_user.groups.where(name: params[:user]).limit(1)
+      puts(@group)
+      puts("------------------------------chossen group--------------------------")
+      if @group != []
+        @members = @group[0].users
+        if @members
+          puts("---------------render groups--------------------")
+          respond_to do |format|
+            format.js { render partial: "javascripts/orders/search_result" }
+          end
+        end  
+      elsif @members
+        puts("---------------render members--------------------")
+        respond_to do |format|
+          format.js { render partial: "javascripts/orders/search_result" }
+        end
+      else
+        respond_to do |format|
+          flash.now[:alert] = "User is not in your friendlist"
+          format.js { render partial: "javascripts/orders/search_result" }
+        end
+      end
+    else
+      respond_to do |format|
+        @group = current_user.groups.find(params[:group_id])
+        @members = []
+        flash.now[:alert] = "Please enter a friend name or email to search"
+        format.js { render partial: "javascripts/orders/search_result" }
+      end
+    end
+  end
+
+  def addToInvitedList
+    if params[:user].present?
+      InvitedUsers.add(User.find(params[:user]))
+      puts(InvitedUsers.get())
+      @friends_to_invite = InvitedUsers.get()
+      render partial: "javascripts/orders/invitation_list"
+    end
+  end
+
+  def removeFromInvitedList
+    if params[:user].present?
+      InvitedUsers.delete(User.find(params[:user]))
+      puts(InvitedUsers.get())
+      @friends_to_invite = InvitedUsers.get()
+      render partial: "javascripts/orders/invitation_list"
+    end
+  end
+
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
