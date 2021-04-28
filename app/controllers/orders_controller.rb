@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     # @orders = Order.where(user_id: current_user.id)
-    @orders = Order.all
+    @orders = Order.where(user: current_user).or(Order.where(user: current_user.friends))
   end
 
   def show
@@ -177,7 +177,7 @@ class OrdersController < ApplicationController
       invitedMember.destroy
     end
     notification.destroy
-    redirect_to "/orders"
+    redirect_to "/notifications"
   end
 
   private
