@@ -76,7 +76,7 @@ Now you can open the project from your browser http://127.0.0.1:3000/
 
 ## Contributors
 
-* [Shehab Eldeen](https://github.com/ShehabEl-DeenAlalkamy)
+* [Shehab El-Deen Alalkamy](https://github.com/ShehabEl-DeenAlalkamy)
 * [Mohab Rabie](https://github.com/mohabrabie)
 * [Mostafa Moawad](https://github.com/Mostafa-Moawad)
 * [Ibrahim Magdy](https://github.com/ebrahimmagdy)
