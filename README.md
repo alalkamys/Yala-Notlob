@@ -38,11 +38,10 @@ reboot your system
  ```sh
     init 6
  ```
-init 6
 
 Install rails version 6.1.3
  ```sh
-        gem install rails -v 6.1.3.1
+    gem install rails -v 6.1.3.1
  ```
 
 ## Getting Started
