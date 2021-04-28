@@ -14,3 +14,11 @@ Yala Notlob is an Online ordering System where you can make groups of your frien
 * Make orders with your chosen menu.
 * Invite your friends to your order.
 * Get activity notifications.
+
+
+## Screenshots
+### Add your friends and assign them to your group
+  ![terminal screenshot](https://raw.githubusercontent.com/ShehabEl-DeenAlalkamy/Yala-Notlob/master/friends.gif)
+### Create your orders  
+  ![terminal screenshot](https://raw.githubusercontent.com/ShehabEl-DeenAlalkamy/Yala-Notlob/master/createOrder.gif)
+  
