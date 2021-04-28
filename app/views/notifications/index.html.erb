@@ -1,16 +1,32 @@
-<ul class="list-group">
-    <% current_user.receiver_notifications.each do |notification| %>
-        <% if notification.notification_type == "invitation" %>
-            <li class="list-group-item">
-            <%= notification.sender.full_name %> Has Invited You to His Order
-            <%= link_to "Join", user_accepte_to_join_order_path(notification_id: notification.id, user: notification.receiver, order: notification.order), class: "btn btn-sm btn-success", method: :get %>
-            <%= link_to "Cancel", user_refuse_to_join_order_path(notification_id: notification.id, user: notification.receiver, order: notification.order), class: "btn btn-sm btn-success", method: :get %>
-            </li>
-        <% else %>
-            <li class="list-group-item">
-                <a class="" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>">
-                 <%= notification.sender.full_name %> Joined Your <%= notification.order.mealtype %> </a>
-            </li>
+<div class="card mt-5">
+<div class="card-header text-center"><h3><i class="bi bi-bell-fill"></i> All Notifications</h3></div>
+<div class="card-body">
+    <ul class="list-group text-center">
+        <% current_user.receiver_notifications.each do |notification| %>
+            <% if notification.notification_type == "invitation" %>
+                <li class="list-group-item mt-2">
+                    <div class="container mx-5">
+                        <%# <div class="row"> %>
+                            <%# <div class="col-6"> %>
+                                <%= notification.sender.full_name %> Has Invited You to His Order
+                            <%# </div>     %>
+                            <%# <div class="col-6">     %>
+                                <%= link_to "Join", user_accepte_to_join_order_path(notification_id: notification.id, user: notification.receiver, order: notification.order), class: "btn btn-sm btn-success ml-3", method: :get %>
+                                <%= link_to "Cancel", user_refuse_to_join_order_path(notification_id: notification.id, user: notification.receiver, order: notification.order), class: "btn btn-sm btn-danger", method: :get %>
+                            <%# </div> %>
+                        <%# </div> %>
+                    </div>           
+                </li>
+            <% else %>
+                <li class="list-group-item mt-2">
+                <div class="container mx-2">
+                    <a class="" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>">
+                    <%= notification.sender.full_name %> Joined Your <%= notification.order.mealtype %> </a>
+                </div>      
+                </li>
+            <% end %>
+            <hr/>
         <% end %>
-    <% end %>
-</ul>
+    </ul>
+</div>    
+</div>  

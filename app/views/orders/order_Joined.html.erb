@@ -1,12 +1,40 @@
-<h1>Joined people</h1>
-<div class="row col-md-12 m-3 mt-5">
-    <%  @joined_users.each do |invited_id|%>
-        <div class="col-md-2 m-5 " id = <%= invited_id.id %>>
-            <img src="<%= invited_id.user.get_image %>"><br>
-            <%= invited_id.user.full_name %><br>
-            <%= link_to 'Remove', remove_joined_path(@order, invited_id) , remote: true,
-            method: :get ,
-            data: { confirm: "Are you sure?" } %>
-        </div><br>
-    <% end %>
+<div class="card mt-5">
+  <div class="card-header text-center">
+    <h3><i class="bi bi-person-lines-fill"></i> Joined people</h3>
+  </div>
+  <div class="card-body">
+    <div class="row " style="top:0%, left:0%">
+      <div class="col-md-10 row overflow-auto m-auto mt-5" id="friends-container" style="top: 0%; left: 0%; max-height: 350px;">
+        <% if @joined_users.length == 0 %>
+            <div class="alert alert-secondary text-center my-5" role="alert"style="width: 100%; " >
+                There is NO joined friends !
+            </div>
+        <% else %>
+            <% @joined_users.each do |invited_id| %>
+                <div id = <%= invited_id.id %> class="col-md-4">
+                    <div class="row" style="top:0%, left:0%">
+                    <div class="card mx-5 my-3">
+                        <div class="card-body">
+                        <div class="col-md-6">
+                            <%= image_tag invited_id.user.get_image, style: "height:120px;width:120;" %>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <h4>
+                            <div class="badge badge-light"> <%= invited_id.user.full_name %></div>
+                            </h4>
+                            <hr/>
+                        <h6> 
+                            <%= link_to 'Remove', remove_joined_path(@order, invited_id), class:"btn btn-danger btn-sm", style: "color: white", remote: true, method: :get, data: { confirm: "Are you sure?" } %>
+                            </h6> 
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
