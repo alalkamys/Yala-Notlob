@@ -10,7 +10,7 @@ class FriendsController < ApplicationController
       candidate_friend_instance = Friendship.new friend_id: candidate_friend.id, user_id: current_user.id
       # * user is valid
       if candidate_friend_instance.save
-        Notification.notify_invite()
+        # Notification.notify_invite()
 
         new_friend = {
           id: candidate_friend.id,
