@@ -25,7 +25,7 @@ Yala Notlob is an Online ordering System where you can make groups of your frien
   ![terminal screenshot](https://raw.githubusercontent.com/ShehabEl-DeenAlalkamy/Yala-Notlob/master/createOrder.gif)
   
  
-## Prerequisite  
+## Prerequisites  
 
 Install ruby version 2.6.6
  ```sh
