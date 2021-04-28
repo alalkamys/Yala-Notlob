@@ -11,5 +11,5 @@ class Order < ApplicationRecord
   # Relationship with invited member
   has_many :notifications, dependent: :destroy
 
-  has_one_attached :menu_img
+  # has_one_attached :menu_img
 end
