@@ -99,14 +99,3 @@
     </table>
 </div>
 
-<div class="row col-md-12 m-3 mt-5">
-<%  if @order.invited_members.where(joind: true).map(&:user_id).include? current_user.id or @order.user.id == current_user.id and @order.status == "Active" %>
-
-<% if @order.menu_img.attached? %>
-    <%= image_tag @order.menu_img, style: "width: 50%; display: block" %>
-<% end %>
-
-<h1>Add Item</h1>  
-<%= render "form_item" %>
-<% end %>
-</div>
