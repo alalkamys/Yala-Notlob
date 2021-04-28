@@ -46,6 +46,12 @@ Install rails version 6.1.3
 
 ## Getting Started
 
+After cloning the repository:
+
+ ```sh
+    cd Yala-Notlob/
+ ```
+
  ```sh
     bundle install
  ```
