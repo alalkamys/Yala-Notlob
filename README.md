@@ -65,3 +65,4 @@ Install rails version 6.1.3
  ```sh
     rails s
  ```
+Now you can open the project from your browser http://127.0.0.1:3000/
