@@ -1,24 +1,16 @@
-# README
+# :sparkles: Yala Notlob
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) 
 
-Things you may want to cover:
+Yala Notlob is an Online ordering System where you can make groups of your friends and invite them to order a meal from a certain restaurant using Ruby On Rails
 
-* Ruby version
 
-* System dependencies
+## Features
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Login and signup using Google authentication.
+* Add your friends by their Emails.
+* Create groups with your.
+* Make orders with your chosen menu.
+* Invite your friends to your order.
+* Get activity notifications.
