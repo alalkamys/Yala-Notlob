@@ -8,8 +8,6 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @Items = OrderMember.where(order: @order)
-    @invited = InvitedMember.where(order_id: @order.id).count
-    @joind = InvitedMember.where(joind: true).where(order_id: @order.id).count
   end
 
   def new
@@ -129,16 +127,14 @@ class OrdersController < ApplicationController
     invited_member = InvitedMember.find(@id)
     invited_member.destroy
     order_member = @order.order_members.where(user_id: invited_member.user_id)
-  order_member.each do |item|
-    item.destroy
-  end
+    order_member.each do |item|
+      item.destroy
+    end
     respond_to do |format|
       format.js { render partial: "javascripts/orders/remove_user" }
     end
   end
-
-
-
+  
   private
     def order_params
       params.require(:order).permit(:mealtype, :resturant_name, :menu_img, :option, :joined_id, :invited_id).merge(user: current_user)

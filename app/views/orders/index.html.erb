@@ -32,6 +32,7 @@
   </thead>
   <tbody>
    <% @orders.each do |order| %>
+
     <tr id="<%= order.id %>">
       <td><%= order.mealtype %></td>
       <td><%= order.resturant_name %></td>
