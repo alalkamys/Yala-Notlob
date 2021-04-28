@@ -2,9 +2,9 @@
     <% current_user.receiver_notifications.each do |notification| %>
         <% if notification.notification_type == "invitation" %>
             <li class="list-group-item">
-                <a class="" href="/orders/<%= notification.order.id %>" data-seen="false" data-id="<%= notification.id %>">
-                <%= notification.sender.full_name %> Has Invited You to His Order
-                </a>
+            <%= notification.sender.full_name %> Has Invited You to His Order
+            <%= link_to "Join", user_accepte_to_join_order_path(notification_id: notification.id, user: notification.receiver, order: notification.order), class: "btn btn-sm btn-success", method: :get %>
+            <%= link_to "Cancel", user_refuse_to_join_order_path(notification_id: notification.id, user: notification.receiver, order: notification.order), class: "btn btn-sm btn-success", method: :get %>
             </li>
         <% else %>
             <li class="list-group-item">

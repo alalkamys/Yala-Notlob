@@ -2,7 +2,7 @@
 <div class="row col-md-12 m-3 mt-5">
     <%  @joined_users.each do |invited_id|%>
         <div class="col-md-2 m-5 " id = <%= invited_id.id %>>
-            <%= invited_id.user.image %><br>
+            <img src="<%= invited_id.user.get_image %>"><br>
             <%= invited_id.user.full_name %><br>
             <%= link_to 'Remove', remove_joined_path(@order, invited_id) , remote: true,
             method: :get ,

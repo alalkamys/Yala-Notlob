@@ -1,3 +1,4 @@
+require 'active_record/errors'
 class OrdersController < ApplicationController
 
   def index
@@ -6,10 +7,14 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @Items = OrderMember.where(order: @order)
-    @invited = InvitedMember.where(order_id: @order.id).count
-    @joind = InvitedMember.where(joind: true).where(order_id: @order.id).count
+    begin
+      @order = Order.find(params[:id])
+      @Items = OrderMember.where(order: @order)
+      @invited = InvitedMember.where(order_id: @order.id).count
+      @joind = InvitedMember.where(joind: true).where(order_id: @order.id).count
+    rescue => e 
+      raise AbstractController::ActionNotFound.new("Sorry this order is deleted")
+    end 
   end
 
   def new
@@ -23,7 +28,9 @@ class OrdersController < ApplicationController
     friends_to_invite = InvitedUsers.get()
     if @order.save
       friends_to_invite.each do |user|
-        InvitedMember.create(order: @order, user: user, joind: false)
+        userModel = User.find(user.id)
+        invitedMember = InvitedMember.create(order: @order, user: userModel, joind: false)
+        Notification.notify_invite(invitedMember)
       end
       redirect_to @order
     else
@@ -50,14 +57,15 @@ class OrdersController < ApplicationController
       puts(@group)
       puts("------------------------------chossen group--------------------------")
       if @group != []
-        @members = @group[0].users
+        @members = @group[0].group_participants.all.map { |group_participant| group_participant.user }
         if @members
           puts("---------------render groups--------------------")
           respond_to do |format|
             format.js { render partial: "javascripts/orders/search_result" }
           end
         end  
-      elsif @members
+      elsif @members != []
+        puts(@members)
         puts("---------------render members--------------------")
         respond_to do |format|
           format.js { render partial: "javascripts/orders/search_result" }
@@ -129,15 +137,48 @@ class OrdersController < ApplicationController
     invited_member = InvitedMember.find(@id)
     invited_member.destroy
     order_member = @order.order_members.where(user_id: invited_member.user_id)
-  order_member.each do |item|
-    item.destroy
-  end
+    order_member.each do |item|
+      item.destroy
+    end
     respond_to do |format|
       format.js { render partial: "javascripts/orders/remove_user" }
     end
   end
 
+  def joinOrder
+    puts(params)
+    @user = User.find(params[:user])
+    @order = Order.find(params[:order])
+    notification = Notification.find(params[:notification_id])
+    invitedMember = InvitedMember.find_by(user: @user, order: @order)
+    puts(invitedMember)
+    notification.destroy
+    if @order.status != "Active"
+      raise AbstractController::ActionNotFound.new('Sorry this order is finished!')
+    end
+    if invitedMember == nil
+      raise AbstractController::ActionNotFound.new('Sorry you are no longer invited to this order or this order is deleted!')
+    end
+    if invitedMember != nil and @order.status == "Active"
+      invitedMember.update(joind: true)
+      Notification.notify_accept(@order, @user)
+    end
+    redirect_to @order
+  end
 
+  def cancelInvitaion
+    puts(params)
+    @user = User.find(params[:user])
+    @order = Order.find(params[:order])
+    notification = Notification.find(params[:notification_id])
+    invitedMember = InvitedMember.find_by(user: @user, order: @order)
+    puts(invitedMember)
+    if invitedMember != nil
+      invitedMember.destroy
+    end
+    notification.destroy
+    redirect_to "/orders"
+  end
 
   private
     def order_params

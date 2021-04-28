@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "search_user_to_invite", to: "orders#search"
   get "add_user_to_invited_list", to: "orders#addToInvitedList"
   get "remove_user_from_invited_list", to: "orders#removeFromInvitedList"
+  get "user_accepte_to_join_order", to: "orders#joinOrder"
+  get "user_refuse_to_join_order", to: "orders#cancelInvitaion"
   # for invited and joined users
   get 'orders/:order_id/invited', :to => 'orders#order_Invited', as: "order_invited"
   get 'orders/:order_id/joined', :to => 'orders#order_Joined', as: "order_joined"

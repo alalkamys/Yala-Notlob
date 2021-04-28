@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
               <%= form.label :restaurant_name %><br>
-              <%= form.text_field :resturant_name, class:"form-control", placeholder: "Enter the restaurant name"%>
+              <%= form.text_field :resturant_name, class:"form-control", placeholder: "Enter the restaurant name", required: true%>
               <% order.errors.full_messages_for(:resturant_name).each do |message| %>
                 <div><%= message %></div>
               <% end %>
