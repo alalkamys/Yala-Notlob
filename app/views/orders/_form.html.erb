@@ -1,5 +1,5 @@
 <div class="row col-md-12">
-  <div class="card col-md-6 mt-5">
+  <div class="card  mt-5" style="width: 50%;">
       <div class="card-header text-center">
           <h3>
           <i class="bi bi-clipboard-plus"></i>
@@ -7,10 +7,9 @@
           </h3>
       </div>
       <div class="card-body">
-        <%# <form> %>
           <%= form_with model: order do |form| %>
             <div class="form-group">
-              <%= form.label :'Order for', class:"col-sm-3 col-form-label" %>
+              <%= form.label :'order for', class:"col-sm-3 col-form-label" %>
               <%= form.select :mealtype, options_for_select(["Breakfast", "Launch", "Dinner", "Other"]), {}, {class: "form form-group form-control"}  %>
             </div>
             <div class="form-group">
@@ -22,7 +21,7 @@
             </div>
             <div class="custom-file mt-3">
               <%= form.label :'Choose the menu image', class:"custom-file-label" %>
-            <%= form.file_field :menu_img, class:"custom-file-input" %>
+              <%= form.file_field :menu_img, class:"custom-file-input" %>
             </div>
             <%# <div> %>
               <%# <%= form.label :owner %>
@@ -32,23 +31,21 @@
               <%= form.submit :Submit, class:"btn btn-success btn-lg btn-block", style:"color:white" %>
             </div>
           <% end %>
-        <%# </form> %>
       </div>
 </div>
 <%# -----------------------Selecting a Group----------------------- %>
   <div class="col-md-6 mt-6 mt-5">
-    <div class="card bg-light">
+    <div class="card bg-light" style="width: 110%;">
       <h3>
         <div class="card-header card-custom text-center">Invited Friends</div>
       </h3>
 
       <%= form_tag search_user_to_invite_path, remote: true, method: :get do %>
-
-        <div class="row col-md-12 form-group d-flex justify-content-between">
-          <div class="row col-md-12 align-self-center m-auto">
-            <%= label :name, "Invite Friends to this orders", class: "col-form-label fw-bold" %>
+        <div class="row col-md-12 my-3">
+          <div class="row mx-3">
+            <%= label :name, "Invite Friends to this order", class: "col-form-label fw-bold" %>
           </div>
-          <div class="row col-md-12 align-self-center">
+          <div class="row col">
             <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email / group to invite", autofocus: true, class: "form-control" %>
           </div>
           <div class="row col-md-12 md-1 m-1 align-self-center m-auto d-none">
@@ -59,13 +56,11 @@
 
       <%# -----------------------Searched Members Results----------------------- %>
       <div class="row" style="top:0%, left:0%">
-        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="search-results">
-        </div>
+        <div class="col-md-10 row " style="top: 0%; left: 0%; max-height: 350px;" id="search-results"></div>
       </div>
       <%# -----------------------Selected Group Members----------------------- %>
       <div class="row" style="top:0%, left:0%">
-        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="invitation_list">
-        </div>
+        <div class="col-md-10 row overflow-auto m-auto mt-5" style="top: 0%; left: 0%; max-height: 350px;" id="invitation_list"></div>
       </div>
 
       <%# -----------------------Including app/javascript/packs/ js files----------------------- %>

@@ -1,0 +1,33 @@
+version: '3'
+
+volumes:
+  gem_cache:
+
+services:
+  redis:
+    image: redis:4.0-alpine
+    command: redis-server
+    ports:
+        - '6379:6379'
+  
+  app:
+    build:
+      context: .
+    container_name: yalanotlob
+    volumes:
+         - .:/usr/src/yala-notlob
+         - gem_cache:/usr/local/bundle/gems
+    ports:
+        - 3000:3000
+    stdin_open: true
+    tty: true
+    command: >
+        bash -c "rails db:migrate
+        && rm -f tmp/pids/server.pid
+        && rails server -p 3000 -b 0.0.0.0"
+    depends_on:
+        - redis
+    environment: 
+        - REDIS_URL=redis://redis:6379
+    links:
+        - redis

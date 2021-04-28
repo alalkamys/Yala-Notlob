@@ -2,7 +2,7 @@ $("#friend-<%= @friend_id %>").fadeOut(500, function () {
   $(this).remove();
   $(`<div class="text-center alert alert-success" style="margin-top: 10px; font-size: medium;">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= @friend_name %> is removed from your friends list 
+      <%= @friend_name %> is successfully removed from your friends list 
      </div>`).insertAfter("#email");
 });
 

@@ -12,8 +12,9 @@
 
   <body>
     <%= render "layouts/navbar" %>
+          <%= render "layouts/alerts" %>
+
     <div class="container">
-      <%= render "layouts/alerts" %>
       <%= yield %>
     </div>
     <% if current_user %>

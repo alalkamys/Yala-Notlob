@@ -1,19 +1,89 @@
-<h1>Order Details</h1>
-<div class="row col-md-12 m-3 mt-5">
-    <div class="row col-md-8 ">
-        <table id="items_table" class="table text-center ">
-            <thead class="table-dark">
-                <tr>
-                    <th>Person</th>
-                    <th>Item</th>
-                    <th>Amount</th>
-                    <th>Price</th>
-                    <th>Comment</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="items_table_body">
-            <%  @Items.each do |item|   %>
+<%################### ADD ITEMS ######################%>
+
+<div class="card mt-4">
+  <div class="card-header text-center">
+        <h3>
+          <i class="bi bi-card-text"></i> Order Details
+        </h3>
+    </div>
+  <div class="card-body">
+    <div class="row">
+        <div class="col-7">
+            <%  if @order.invited_members.where(joind: true).map(&:user_id).include? current_user.id or @order.user.id == current_user.id and @order.status == "Active" %>
+                <div class="card">
+                    <div class="card-body">
+                        <%= render "form_item" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
+        <% if current_user.id == @order.user_id %>
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card mt-4 border-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <%= @order.invited_members.where(joind: false).count %> Friends invited but not joined 
+                                    </div>
+                                    <div class="col-3">
+                                        <%= link_to 'View', order_invited_path(@order), class:"btn btn-outline-primary" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card my-4 border-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <%= @order.invited_members.where(joind: true).count %> Friends joind 
+                                    </div>
+                                    <div class="col-3">
+                                        <%= link_to 'View', order_joined_path(@order), class:"btn btn-outline-primary" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% else %>
+            <img src="https://i.pinimg.com/originals/e4/4c/57/e44c577196d295eb166d7455078f5ca9.png" class="center m-auto" width="250" height="250">
+        <% end %>
+    </div>    
+  </div>
+</div>
+
+
+
+
+
+<%################### TABLE ######################%>
+
+<style>
+  .thead-cusom
+  {
+    background-color: #FF5A01;
+    color: white;
+  }
+</style>
+
+<div class="card mt-2">
+    <table class="table text-center ">
+        <thead class="thead-cusom">
+            <tr>
+            <th scope="col">Person</th>
+            <th scope="col">Item</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Price</th>
+            <th scope="col">Comment</th>
+            <th scope="col" colspan="3">Action</th>
+            </tr>
+        </thead>
+        <tbody id="items_table_body">
+            <% @Items.each do |item| %>
                 <tr id = "item_<%= item.id %>">
                     <td><%= item.user.full_name %></td>
                     <td><%= item.item %></td>
@@ -21,21 +91,12 @@
                     <td><%= item.price %></td>
                     <td><%= item.comment %></td>
                     <%  if item.user.id == current_user.id and @order.status == "Active" %>
-                    <td><%= link_to 'Delete Item', [item.order, item], remote: true,
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } %></td>
+                        <td><%= button_to 'Delete Item', [item.order, item], remote: true, class:"btn btn-danger btn-sm", method: :delete, data: { confirm: "Are you sure?" } %></td>
                     <% end %>
                 </tr>
             <% end %>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-3 m-5 mt-5">
-    <% if current_user.id == @order.user_id %>
-    <%= @order.invited_members.where(joind: false).count %> friends invited but not joined <%= link_to 'Click to View', order_invited_path(@order) %><br>
-    <%= @order.invited_members.where(joind: true).count %> fsriends joind <%= link_to 'Click to View', order_joined_path(@order) %>
-    <% end %>
-    </div>
+        </tbody>
+    </table>
 </div>
 
 <div class="row col-md-12 m-3 mt-5">

@@ -1,24 +1,74 @@
-# README
+# :sparkles: Yala Notlob
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) 
 
-Things you may want to cover:
+Yala Notlob is an Online ordering System where you can make groups of your friends and invite them to order a meal from a certain restaurant using Ruby On Rails
 
-* Ruby version
 
-* System dependencies
+## Features
 
-* Configuration
+* Login and signup using Google authentication.
+* Add your friends by their Emails.
+* Create groups with your.
+* Make orders with your chosen menu.
+* Invite your friends to your order.
+* Get activity notifications.
 
-* Database creation
 
-* Database initialization
+## Screenshots
 
-* How to run the test suite
+### Add your friends and assign them to your group
+  ![terminal screenshot](https://raw.githubusercontent.com/ShehabEl-DeenAlalkamy/Yala-Notlob/master/friends.gif)
+  
+### Create your orders  
+  ![terminal screenshot](https://raw.githubusercontent.com/ShehabEl-DeenAlalkamy/Yala-Notlob/master/createOrder.gif)
+  
+ 
+## Prerequisites  
 
-* Services (job queues, cache servers, search engines, etc.)
+Install ruby version 2.6.6
+ ```sh
+    rvm install ruby-2.6.6
+ ```
+ ```sh
+    rvm use 2.6.6 --default
+ ```
+reboot your system 
+ ```sh
+    init 6
+ ```
 
-* Deployment instructions
+Install rails version 6.1.3
+ ```sh
+    gem install rails -v 6.1.3.1
+ ```
 
-* ...
+## Getting Started
+
+After cloning the repository:
+
+ ```sh
+    cd Yala-Notlob/
+ ```
+
+ ```sh
+    bundle install
+ ```
+ 
+ ```sh
+    rails db:migrate
+ ```
+ 
+ ```sh
+    apt install -y redis-server
+ ```
+
+ ```sh
+    yarn add bootstrap-icons
+ ```
+ 
+ ```sh
+    rails s
+ ```
+Now you can open the project from your browser http://127.0.0.1:3000/

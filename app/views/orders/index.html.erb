@@ -40,15 +40,13 @@
       <td><%= order.invited_members.where(joind: true).count %></td>
       <td class="status"><%= order.status %></td>
       <% if order.user == current_user && order.status == "Active" %>
-        <td class="view"><%= link_to "View", order %></td>
-        <td class="finish"><%= link_to 'Finish', [order], remote: true,
-                    method: :put,
-                    data: { confirm: "Are you sure?" } %></th>
-        <td class="cancel"><%= link_to 'Cancel', [order], remote: true,
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } %></th>
+        <td class="view"><%= link_to "View", order, class:"btn btn-outline-primary" %></td>
+        <td class="finish"><%= link_to 'Finish', [order], remote: true, class:"btn btn-outline-danger", method: :put, data: { confirm: "Are you sure?" } %></th>
+        <td class="cancel"><%= link_to 'Cancel', [order], remote: true, class:"btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %></th>
     <% else %>
-        <td><%= link_to "View", order %></td>
+        <td><%= link_to "View", order, class:"btn btn-outline-primary" %></td>
+        <td class="finish"><button type="button" class="btn btn-outline-danger" disabled>Finish</button></th>
+        <td class="cancel"><button type="button" class="btn btn-danger" disabled>Cancel</button></th>
     <% end %>
     </tr>
     <% end %>
