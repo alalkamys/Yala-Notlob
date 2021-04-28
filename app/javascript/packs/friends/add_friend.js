@@ -1,6 +1,6 @@
 import axios from "axios";
 
-document.addEventListener("turbolinks:load", () => {
+$(document).ready(function () {
   // Getting HTML elements
   const addBtn = document.querySelector("#friends-add-btn");
   const friendsContainer = $("#friends-container");
@@ -58,7 +58,7 @@ document.addEventListener("turbolinks:load", () => {
 
           $(`<div class="text-center alert alert-success" style="margin-top: 10px; font-size: medium;">
              <button type="button" class="close" data-dismiss="alert">&times;</button>
-             You have added ${newFriend.full_name} successfully 
+             You have successfully added ${newFriend.full_name}  
           </div>`).insertAfter("#email");
         } else {
           const errors = data.errors;
