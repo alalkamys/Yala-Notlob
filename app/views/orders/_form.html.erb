@@ -1,5 +1,5 @@
 <div class="row col-md-12">
-  <div class="card col-md-6  mt-5">
+  <div class="card col-md-6 mt-5">
       <div class="card-header text-center">
           <h3>
           <i class="bi bi-clipboard-plus"></i>
@@ -35,15 +35,8 @@
         <%# </form> %>
       </div>
 </div>
-<div class="col-md-5 mt-5 m-2">
-<% @friends_to_invite.each do |friend| %>
-  <div>
-    <%#= form.label :"type friends email to invite" %><br>
-    <%#= form.text_field :user, value: friend.friend.email,:readonly => true %><br>
-  </div>
-<% end %>
 <%# -----------------------Selecting a Group----------------------- %>
-  <div class="col-sm-8 mb-3 mt-4">
+  <div class="col-md-6 mt-6 mt-5">
     <div class="card bg-light">
       <h3>
         <div class="card-header card-custom text-center">Invited Friends</div>
@@ -51,14 +44,14 @@
 
       <%= form_tag search_user_to_invite_path, remote: true, method: :get do %>
 
-        <div class="form-group d-flex justify-content-between">
-          <div class="col-3 align-self-center m-auto">
+        <div class="row col-md-12 form-group d-flex justify-content-between">
+          <div class="row col-md-12 align-self-center m-auto">
             <%= label :name, "Invite Friends to this orders", class: "col-form-label fw-bold" %>
           </div>
-          <div class="col-sm-8 m-2 align-self-center">
+          <div class="row col-md-12 align-self-center">
             <%= text_field_tag :user, params[:user], placeholder: "Enter a name / email / group to invite", autofocus: true, class: "form-control" %>
           </div>
-          <div class="col-2 align-self-center m-auto d-none">
+          <div class="row col-md-12 md-1 m-1 align-self-center m-auto d-none">
             <input type="submit" value="Search" class="btn btn-success btn-lg" id="btn-img">
           </div>
         </div>
