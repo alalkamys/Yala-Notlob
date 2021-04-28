@@ -4,7 +4,7 @@ class Group < ApplicationRecord
   # * Relationship with members (Many to Many)
   # has_many :users, :through => :groups_users
   # has_many :groups_users
-  has_many :group_participants
+  has_many :group_participants, dependent: :destroy
 
     # has_many :groups_users, class_name: "GroupsUser", dependent: :destroy
   # has_and_belongs_to_many :users ,    :through => :groups_users ,dependent: :delete_all
