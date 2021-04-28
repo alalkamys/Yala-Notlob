@@ -71,7 +71,7 @@ document.addEventListener("turbolinks:load", () => {
             let newNotification = "";
             let oldNotifications = notificationsElement.innerHTML;
             if (data.notification_type === "invitation") {
-              newNotification = `<a class="dropdown-item font-weight-bold" href='/orders/${data.order.id}' data-seen="false" data-id="${data.notification_id}"> ${data.sender.full_name}
+              newNotification = `<a class="dropdown-item font-weight-bold" href='/notifications' data-seen="false" data-id="${data.notification_id}"> ${data.sender.full_name}
                                   Has Invited You to His Order</a>`;
               newNotification += `<div class="dropdown-divider"></div>`;
             } else {

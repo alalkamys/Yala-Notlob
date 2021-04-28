@@ -1,6 +1,12 @@
 require 'active_record/errors'
 class OrdersController < ApplicationController
-
+  #TODO landing page (orders ana 4arekt feha aw ana el 3amaltha)
+  #TODO orders page (el orders el ana 3mltha bc)
+  #TODO nms7 GroupsUser model + GroupMember Model 
+  #TODO el profile picture bta3t el user 
+  #TODO el docker 
+  #TODO notification for orders 
+  #TODO el notifications el mafrod mttms74
   def index
     # @orders = Order.where(user_id: current_user.id)
     @orders = Order.all
