@@ -12,8 +12,8 @@ services:
     container_name: yalanotlob
     ports:
         - 3000:3000
-    stdin_open: true
-    tty: true
+    volumes:
+      - ./db/:/usr/src/yala-notlob/db/
     command: >
         bash -c "rails db:migrate
         && rm -f tmp/pids/server.pid
