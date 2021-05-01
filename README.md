@@ -71,6 +71,16 @@ After cloning the repository:
  ```sh
     rails s
  ```
+ 
+Using docker :
+
+ ```sh
+   docker-compose build --build-arg facebook_id=FACEBOOK_APP_ID \
+                        --build-arg facebook_secret=YOUR_FACEBOOK_APP_SECRET \
+                        --build-arg google_id=YOUR_GOOGLE_APP_ID  \
+                        --build-arg google_secret=YOUR_GOOGLE_APP_SECRET
+ ```
+
 Now you can open the project from your browser http://127.0.0.1:3000/
 
 
