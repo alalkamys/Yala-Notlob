@@ -76,7 +76,7 @@ Using docker :
 * Build the application image:
  ```sh
    docker-compose build --build-arg facebook_id=<YOUR_FACEBOOK_APP_ID> \
-                        --build-arg facebook_secret=<YOUR_FACEBOOK_APP_SECRET \
+                        --build-arg facebook_secret=<YOUR_FACEBOOK_APP_SECRET> \
                         --build-arg google_id=<YOUR_GOOGLE_APP_ID>  \
                         --build-arg google_secret=<YOUR_GOOGLE_APP_SECRET>
  ```
